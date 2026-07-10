@@ -1,0 +1,1047 @@
+/* ==========================================================================
+   RESET GENERAL Y VARIABLES DE ESTILO
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden; /* Evita definitivamente el bamboleo o scroll lateral */
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #110C09; /* Fondo oscuro orgánico principal */
+    color: #F9F3EB; /* Texto claro/hueso para contraste perfecto */
+}
+
+/* ==========================================================================
+   COMPONENTE: NAVBAR (Actualizado a paleta oscura)
+   ========================================================================== */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background-color: #16110D; /* Fondo oscuro integrado */
+    box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 10;
+    border-bottom: 1px solid #231A14;
+}
+
+.nav-identity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-container {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1.5px solid #3A2B21;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1A130E;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    flex-shrink: 0;
+}
+
+.logo-img {
+    width: 75%;
+    height: 75%;
+    object-fit: contain;
+    display: block;
+    filter: brightness(0.9) contrast(1.1); /* Ajuste leve para logos en fondo oscuro */
+}
+
+.svg-container {
+    width: 400px;
+    height: 110px;
+    overflow: visible;
+    margin-left: 5px;
+    margin-top: -10px;
+}
+
+.svg-container svg {
+    overflow: visible;
+    display: block;
+}
+
+/* Cambio de color en las tipografías del SVG inyectado para que contrasten */
+.svg-container svg text, 
+.svg-container svg path {
+    fill: #F9F3EB !important;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 35px;
+    align-items: center;
+    padding-right: 10px;
+}
+
+.nav-menu a {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #E3D5CA; /* Texto crema suave */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-menu a:hover {
+    color: #dfb286; /* Dorado/tostado cálido al pasar el mouse */
+}
+
+/* ==========================================================================
+   SECCIÓN: HERO / HEADER BIENVENIDA (Actualizado a paleta oscura)
+   ========================================================================== */
+.main-header {
+    background-color: #110C09; /* Fondo oscuro orgánico */
+    padding: 80px 20px;
+    text-align: center;
+    border-bottom: 1px solid #1A130E;
+}
+
+.header-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-title {
+    font-family: 'Caveat', 'Comic Sans MS', cursive;
+    font-size: 4.5rem;
+    color: #ff4a4a; /* Rojo vibrante ajustado para resaltar sobre negro */
+    margin: 0;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.header-subtitle {
+    font-size: 1.4rem;
+    color: #40b3d0; /* Azul turquesa/teal claro adaptado para fondo oscuro */
+    font-weight: 600;
+    max-width: 700px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   SECCIÓN: EL MANIFIESTO AGROECOLÓGICO
+   ========================================================================== */
+.manifesto-section {
+    background: linear-gradient(135deg, #4A1519 0%, #110C09 100%); /* Ajustado a vino profundo y negro */
+    color: #F9F3EB;
+    padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid #231A14;
+}
+
+.manifesto-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: repeating-linear-gradient(45deg, #dfb286, #dfb286 10px, transparent 10px, transparent 20px);
+    opacity: 0.15; /* Menor opacidad para no ensuciar el bloque oscuro */
+}
+
+.manifesto-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.manifesto-content p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #E3D5CA;
+    font-weight: 400;
+    margin: 0;
+}
+
+.manifesto-divider {
+    width: 60px;
+    height: 3px;
+    background-color: #dfb286;
+    margin: 30px auto 0 auto;
+    clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
+}
+
+/* ==========================================================================
+   SECCIÓN: EVENTOS
+   ========================================================================== */
+.events-section {
+    padding: 80px 20px;
+    background-color: #1A130E; /* Integrado al fondo secundario */
+}
+
+.events-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.section-title-white {
+    font-size: 2.2rem;
+    color: #F9F3EB;
+    text-align: center;
+    margin-bottom: 45px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+}
+
+.events-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.event-card-link {
+    text-decoration: none;
+    flex: 1;
+    min-width: 300px;
+    max-width: 340px;
+    display: flex;
+}
+
+.event-card {
+    background-color: #231A14; /* Tarjeta oscura */
+    border: 1px solid #2D221A;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    border-color: #dfb286;
+}
+
+.image-container {
+    width: 100%;
+    height: 420px;
+    overflow: hidden;
+    background-color: #110C09;
+    position: relative;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(74, 21, 25, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.event-card:hover .hover-overlay {
+    opacity: 1;
+}
+
+.hover-text {
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 2px solid #ffffff;
+    padding: 12px 24px;
+    border-radius: 8px;
+}
+
+.event-details {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 12px;
+}
+
+.event-date {
+    font-size: 0.9rem;
+    color: #ff4a4a;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.event-title {
+    font-size: 1.3rem;
+    color: #F9F3EB;
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.event-description {
+    font-size: 1rem;
+    color: #A9927D;
+    margin: 0;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.event-location {
+    border-top: 1px solid #2D221A;
+    padding-top: 15px;
+    margin-top: 5px;
+    font-size: 0.95rem;
+    color: #40b3d0;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   SECCIÓN: ALMACÉN DE PRODUCTOS
+   ========================================================================== */
+.catalog-section {
+    background-color: #110C09; /* Balanceo alternado de fondos orgánicos */
+    color: #F9F3EB;
+    padding: 90px 20px;
+    position: relative;
+    border-top: 1px solid #1A130E;
+}
+
+/* ==========================================================================
+   BOTONERA DE FILTROS (ALMACÉN)
+   ========================================================================== */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    background-color: #1A130E;
+    color: #A9927D;
+    border: 1px solid #231A14;
+    padding: 10px 22px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    color: #F9F3EB;
+    border-color: #A9927D;
+}
+
+.filter-btn.active {
+    background-color: #F9F3EB;
+    color: #110C09;
+    border-color: #F9F3EB;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Animación de desvanecimiento para las tarjetas */
+.wine-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease, display 0.3s allow-discrete;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.catalog-divider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 16px;
+    background-color: #1A130E;
+    clip-path: polygon(0 0, 5% 100%, 10% 0, 15% 100%, 20% 0, 25% 100%, 30% 0, 35% 100%, 40% 0, 45% 100%, 50% 0, 55% 100%, 60% 0, 65% 100%, 70% 0, 75% 100%, 80% 0, 85% 100%, 90% 0, 95% 100%, 100% 0);
+}
+
+.catalog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.catalog-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.catalog-title {
+    font-weight: 800;
+    font-size: 2.6rem;
+    text-transform: uppercase;
+    color: #F9F3EB;
+    letter-spacing: 0.5px;
+}
+
+.accent-text {
+    color: #dfb286;
+}
+
+.catalog-subtitle {
+    color: #A9927D;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
+    gap: 30px;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1100px;
+}
+
+.wine-card {
+    background-color: #1A130E;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #231A14;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.wine-img-container {
+    position: relative;
+    height: 320px;
+    background-color: #110C09;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wine-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.badge {
+    position: absolute;
+    top: 15px;
+    right: 0;
+    color: #F9F3EB;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.badge-teal { 
+    background-color: #2A6B6F;
+}
+
+.badge-red { 
+    background-color: #582125; 
+}
+
+.wine-details {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.wine-category {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #A9927D;
+    letter-spacing: 1px;
+}
+
+.wine-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin: 4px 0 10px 0;
+    color: #F9F3EB;
+}
+
+.wine-description {
+    font-size: 0.9rem;
+    color: #E3D5CA;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.wine-price {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #dfb286;
+    margin-bottom: 15px;
+}
+
+.whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4A1519;
+    color: #F9F3EB;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    border: 1px solid #5C1E23;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(74, 21, 25, 0.3);
+}
+
+.whatsapp-btn:hover {
+    background-color: #582125;
+    transform: translateY(-2px);
+    border-color: #dfb286;
+}
+
+/* ==========================================================================
+   COMPONENTE: AMIGOS EN LA TRINCHERA
+   ========================================================================== */
+.trinchera-section {
+    background-color: #1A130E;
+    color: #F9F3EB;
+    padding: 80px 20px;
+    border-top: 1px solid #231A14;
+}
+
+.trinchera-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.trinchera-title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.trinchera-subtitle {
+    color: #A9927D;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px auto;
+    line-height: 1.6;
+}
+
+.trinchera-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.trinchera-card {
+    background-color: #110C09;
+    border: 1px solid #231A14;
+    border-radius: 12px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.trinchera-card:hover {
+    transform: translateY(-3px);
+    border-color: #dfb286;
+}
+
+.trinchera-badge {
+    position: absolute;
+    top: -12px;
+    left: 25px;
+    background-color: #1A130E;
+    border: 1px solid #231A14;
+    color: #dfb286;
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
+
+.trinchera-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.amigo-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #F9F3EB;
+    margin-bottom: 12px;
+}
+
+.amigo-bio {
+    font-size: 0.95rem;
+    color: #E3D5CA;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+.amigo-instagram {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    color: #A9927D;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 6px;
+    background-color: #1A130E;
+    border: 1px solid #231A14;
+    transition: all 0.3s ease;
+}
+
+.amigo-instagram i {
+    font-size: 1.1rem;
+}
+
+.amigo-instagram:hover {
+    background-color: #ffffff;
+    color: #110C09;
+    border-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* ==========================================================================
+   COMPONENTE: FOOTER INSTITUCIONAL Y REDES
+   ========================================================================== */
+.main-footer {
+    background-color: #110C09;
+    color: #E3D5CA;
+    padding: 60px 20px 30px 20px;
+    border-top: 1px solid #231A14;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 220px;
+}
+
+.footer-column.branding {
+    min-width: 280px;
+}
+
+.footer-logo {
+    font-family: 'Caveat', cursive;
+    font-size: 2.2rem;
+    color: #F9F3EB;
+    margin: 0 0 15px 0;
+    font-weight: 700;
+}
+
+.footer-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #A9927D;
+    margin: 0;
+    max-width: 320px;
+}
+
+.footer-column-title {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #dfb286;
+    margin: 0 0 20px 0;
+    font-weight: 700;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-link {
+    color: #E3D5CA;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: #ff4a4a;
+}
+
+.footer-text {
+    font-size: 0.95rem;
+    color: #A9927D;
+    margin: 0 0 15px 0;
+    line-height: 1.5;
+}
+
+.email-link {
+    color: #E3D5CA;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.social-wrapper {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #1A130E;
+    border: 1px solid #231A14;
+    color: #A9927D;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background-color: #ffffff;
+    color: #110C09;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.footer-bottom {
+    border-top: 1px solid #231A14;
+    padding-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    font-size: 0.85rem;
+    color: #A9927D;
+}
+
+.legal-notice {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #ff4a4a;
+    border: 1px solid #3A1517;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   COMPONENTE: MODAL POPUP FLOATING OVERLAY
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.modal-overlay.mostrar {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 85vh;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+.modal-img {
+    display: block;
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #231A14;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background-color: #4A1519;
+    color: #F9F3EB;
+    border: 2px solid #F9F3EB;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+    z-index: 100000;
+}
+
+.modal-close-btn:hover {
+    background-color: #dfb286;
+    color: #110C09;
+    transform: scale(1.1);
+}
+
+/* ==========================================================================
+   OPTIMIZACIÓN PARA DISPOSITIVOS MÓVILES (VISTA MOBILE)
+   ========================================================================== */
+@media (max-width: 768px) {
+    body {
+        font-size: 0.95rem;
+    }
+    
+    .navbar {
+        padding: 12px 16px;
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .nav-identity {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .logo-container {
+        width: 55px;
+        height: 55px;
+    }
+
+    .svg-container {
+        width: 260px;
+        height: 75px;
+        margin-top: 0;
+    }
+
+    .nav-menu {
+        padding-right: 0;
+        gap: 25px;
+    }
+
+    .nav-menu a {
+        font-size: 1rem;
+    }
+
+    .main-header {
+        padding: 50px 16px;
+    }
+
+    .header-title {
+        font-size: 2.8rem;
+    }
+
+    .header-subtitle {
+        font-size: 1.15rem;
+    }
+
+    .manifesto-section {
+        padding: 50px 20px;
+    }
+
+    .manifesto-content p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        text-align: left;
+    }
+
+    .events-section {
+        padding: 40px 16px;
+    }
+
+    .section-title-white {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+
+    .events-grid {
+        gap: 20px;
+    }
+
+    .event-card-link {
+        max-width: 100%;
+    }
+
+    .image-container {
+        height: 300px;
+    }
+    
+    .hover-overlay {
+        display: none !important;
+    }
+
+    .catalog-section {
+        padding: 50px 16px;
+    }
+
+    .catalog-title {
+        font-size: 2rem;
+    }
+
+    .filter-container {
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .filter-btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    .catalog-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 340px));
+        gap: 24px;
+    }
+
+    .trinchera-section {
+        padding: 50px 16px;
+    }
+
+    .trinchera-title {
+        font-size: 1.8rem;
+    }
+
+    .trinchera-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .trinchera-card {
+        padding: 24px;
+    }
+
+    .main-footer {
+        padding: 40px 16px 20px 16px;
+    }
+
+    .footer-columns {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .footer-column.branding {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-description {
+        max-width: 100%;
+    }
+
+    .social-wrapper {
+        justify-content: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 360px) {
+    .header-title {
+        font-size: 2.3rem;
+    }
+    .filter-btn {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+    }
+}
