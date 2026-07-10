@@ -1,0 +1,997 @@
+/* ==========================================================================
+   IDENTIDAD CULTURAL: "SUR MODERNO" - TABLERO DE CORCHO COMPLETO
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght=500;700&family=DM+Serif+Display&family=Space+Grotesk:wght=400;500;700&display=swap');
+
+:root {
+    --color-wine: #852229;
+    --color-teal: #4E878C;
+    --color-sun: #E6A633;
+    --font-manuscrita: 'Caveat', cursive;
+    --font-headers: 'DM Serif Display', serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    
+    /* Colores base exactos para simular el papel de los Post-its */
+    --postit-yellow: #FFFD75;
+    --postit-pink: #ffb7d5;
+    --postit-green: #c4f4cf;
+    --postit-blue: #b9e6ff;
+}
+
+/* ==========================================================================
+   RESET GENERAL Y FONDO DE CORCHO TEXTURIZADO GLOBAL
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    background: 
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15), rgba(40, 25, 10, 0.45)),
+        repeating-linear-gradient(45deg, rgba(28, 14, 4, 0.08) 0px, rgba(28, 14, 4, 0.08) 2px, transparent 2px, transparent 4px),
+        repeating-linear-gradient(-45deg, rgba(145, 105, 65, 0.15) 0px, rgba(145, 105, 65, 0.15) 1px, transparent 1px, transparent 3px),
+        radial-gradient(rgba(224, 169, 109, 0.95), rgba(171, 117, 60, 0.98));
+    background-size: 100% 100%, 8px 8px, 6px 6px, 100% 100%;
+    background-blend-mode: normal, multiply, overlay, normal;
+    background-color: #ab753c;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   ESTILO DE LOS CONTENEDORES DE ENCABEZADOS (POST-ITS GRANDES)
+   ========================================================================== */
+.catalog-title, .trinchera-title, .section-title-white, .main-header {
+    max-width: 580px;
+    width: 90%;
+    margin: 80px auto 50px auto !important;
+    padding: 40px 40px 35px 40px !important; 
+    position: relative !important;
+    text-align: center !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    overflow: visible !important; 
+    border: none !important;
+
+    /* Sombreado de deformación realista basado en tu referencia */
+    box-shadow: 5px 5px 12px -2px rgba(33,33,33,.45) !important;
+    transition: transform .15s ease;
+    z-index: 1;
+}
+
+/* Fusión exacta de color base plano con el degradado de relieve superior */
+div.main-header        { background: linear-gradient(to bottom, rgba(0,0,0,0.03), rgba(0,0,0,0.12)), var(--postit-yellow) !important; transform: rotate(2deg) skew(-1deg,1deg) !important; }
+div.section-title-white  { background: linear-gradient(to bottom, rgba(0,0,0,0.03), rgba(0,0,0,0.12)), var(--postit-pink) !important; transform: rotate(-1.5deg) skew(1deg,-1deg) !important; }
+div.catalog-title        { background: linear-gradient(to bottom, rgba(0,0,0,0.03), rgba(0,0,0,0.12)), var(--postit-green) !important; transform: rotate(1.5deg) skew(-1deg,1deg) !important; }
+div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.03), rgba(0,0,0,0.12)), var(--postit-blue) !important; transform: rotate(-2deg) skew(1deg,-1deg) !important; }
+
+/* ==========================================================================
+   FILTROS: PAPEL FLOTANTE INDIVIDUAL DIRECTO SOBRE EL CORCHO
+   ========================================================================== */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 40px auto 50px auto !important;
+    padding: 10px !important;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 5;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    overflow: visible !important;
+}
+
+.filter-btn {
+    border: none !important;
+    padding: 20px 24px 12px 24px !important; /* Más margen arriba para alojar el pin de forma segura */
+    font-family: var(--font-manuscrita);
+    font-size: 1.6rem;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative !important;
+    transition: transform .15s ease, background 0.2s ease, color 0.2s ease;
+    color: #2b251f;
+    overflow: visible !important;
+    box-shadow: 4px 4px 10px -2px rgba(33,33,33,.4) !important;
+}
+
+/* Colores y rotaciones con el relieve integrado directamente */
+.filter-btn:nth-child(4n+1) { background: linear-gradient(to bottom, rgba(0,0,0,0.02), rgba(0,0,0,0.1)), var(--postit-yellow) !important; transform: rotate(2deg) skew(-1deg,1deg); }
+.filter-btn:nth-child(4n+2) { background: linear-gradient(to bottom, rgba(0,0,0,0.02), rgba(0,0,0,0.1)), var(--postit-pink) !important; transform: rotate(-2deg) skew(1deg,-1deg); }
+.filter-btn:nth-child(4n+3) { background: linear-gradient(to bottom, rgba(0,0,0,0.02), rgba(0,0,0,0.1)), var(--postit-green) !important; transform: rotate(1.5deg) skew(-1deg,1deg); }
+.filter-btn:nth-child(4n+4) { background: linear-gradient(to bottom, rgba(0,0,0,0.02), rgba(0,0,0,0.1)), var(--postit-blue) !important; transform: rotate(-1deg) skew(1deg,-1deg); }
+
+.filter-btn:hover {
+    transform: scale(1.05) rotate(0deg) skew(0deg) !important;
+    box-shadow: 5px 8px 14px -1px rgba(33,33,33,0.5) !important;
+    z-index: 10;
+}
+
+.filter-btn.active {
+    background: var(--color-wine) !important;
+    color: #FAF8F5 !important;
+    transform: translateY(2px) rotate(0deg) skew(0deg) !important;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5) !important;
+}
+.filter-btn.active::before { display: none !important; }
+
+/* ==========================================================================
+   SISTEMA DE PINES CON ANCLAJE MATEMÁTICO AL BORDE SUPERIOR
+   ========================================================================== */
+.catalog-title::before, 
+.main-header::before, 
+.section-title-white::before, 
+.trinchera-title::before,
+.filter-btn::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important; /* Clavado exactamente en el borde superior de la hoja */
+    left: 50% !important;
+    /* translate(-50%, -50%) hace que el centro exacto del círculo sea el punto de anclaje */
+    transform: translate(-50%, -50%) !important;
+    z-index: 99 !important;
+    background: radial-gradient(circle at 35% 35%, #ff4d4d, #cc0000 60%, #660000) !important;
+    border-radius: 50% !important;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* El tamaño se maneja de forma independiente sin romper la posición */
+.catalog-title::before, 
+.main-header::before, 
+.section-title-white::before, 
+.trinchera-title::before {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.filter-btn::before {
+    width: 14px !important;
+    height: 14px !important;
+}
+
+/* Limpieza de selectores viejos que tiraban el pin al h1 */
+.catalog-title h1::before, .main-header h1::before, .section-title-white h2::before, .trinchera-title h2::before {
+    display: none !important;
+}
+/* ==========================================================================
+   TEXTOS INTERNOS DE LOS ENCABEZADOS
+   ========================================================================== */
+.catalog-title h1, .main-header h1, .section-title-white h2, .trinchera-title h2 {
+    font-family: var(--font-headers) !important;
+    color: #2b251f !important;
+    font-size: 2.5rem !important;
+    margin-bottom: 8px !important;
+    background: transparent !important;
+}
+
+.catalog-title p, .main-header p, .section-title-white p, .trinchera-title p {
+    font-family: var(--font-body) !important;
+    color: #4a433c !important;
+    font-size: 1.05rem !important;
+    line-height: 1.4 !important;
+    font-weight: 500 !important;
+    background: transparent !important;
+}
+
+/* ==========================================================================
+   TARJETAS DE CONTENIDO: ESTILO FOTOGRAFÍA POLAROID CLAVADA AL CORCHO
+   ========================================================================== */
+.events-section, .catalog-section, .trinchera-section { 
+    padding: 40px 20px; 
+    max-width: 1300px; 
+    margin: 0 auto;
+    background: transparent !important;
+}
+
+.events-grid, .catalog-grid, .trinchera-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    justify-items: center;
+    align-items: start;
+    width: 100%;
+    background: transparent !important;
+}
+
+/* Estilo de foto Polaroid */
+.event-card, .wine-card, .trinchera-card {
+    background-color: #FAF8F2 !important; 
+    border: none !important;
+    border-radius: 0px !important;
+    padding: 16px 16px 32px 16px !important;
+    /* Sombra profunda sobre el fondo texturizado de corcho */
+    box-shadow: 5px 12px 24px rgba(0, 0, 0, 0.42) !important;
+    position: relative !important;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 360px;
+    height: 100%; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Alfiler individual superior para fijar cada Polaroid */
+.event-card::before, .wine-card::before, .trinchera-card::before {
+    content: "" !important;
+    position: absolute !important;
+    top: -10px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 16px !important;
+    height: 16px !important;
+    z-index: 85 !important;
+    background: radial-gradient(circle at 35% 35%, #ff4d4d, #cc0000 65%, #730000) !important;
+    border-radius: 50% !important;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Inclinaciones realistas de las fotos */
+.events-grid .event-card-link:nth-child(odd) .event-card,
+.catalog-grid .wine-card:nth-child(3n+1) { transform: rotate(-1.5deg); }
+.events-grid .event-card-link:nth-child(even) .event-card,
+.catalog-grid .wine-card:nth-child(3n+2) { transform: rotate(2deg); }
+.trinchera-grid .trinchera-card:nth-child(odd) { transform: rotate(1.2deg); }
+.trinchera-grid .trinchera-card:nth-child(even) { transform: rotate(-2deg); }
+
+.event-card:hover, .wine-card:hover, .trinchera-card:hover {
+    transform: scale(1.04) rotate(0deg) !important;
+    box-shadow: 8px 20px 32px rgba(0, 0, 0, 0.52) !important;
+    z-index: 95;
+}
+
+/* ==========================================================================
+   COMPONENTES INTERNOS DE LAS POLAROIDS
+   ========================================================================== */
+.event-card-link { text-decoration: none; width: 100%; display: flex; justify-content: center; }
+.image-container, .wine-img-container { width: 100%; height: 280px; overflow: hidden; background-color: #EBE7DF; border: 1px solid rgba(0,0,0,0.1); }
+.card-img, .wine-img { width: 100%; height: 100%; object-fit: cover; }
+.event-title, .wine-title, .amigo-name { font-family: var(--font-headers) !important; color: #1E1A17 !important; margin: 12px 0 6px 0; font-size: 1.3rem; }
+.event-description, .wine-description, .amigo-bio, .event-date, .wine-price, .event-location { color: #3A332D !important; font-size: 0.95rem; line-height: 1.4; }
+.wine-price { font-size: 1.4rem; font-weight: 700; margin-top: auto; padding-top: 15px; }
+.whatsapp-btn { display: flex; align-items: center; justify-content: center; background-color: var(--color-wine); color: #FAF8F5 !important; padding: 12px; text-decoration: none; font-family: var(--font-body); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px; margin-top: 10px; transition: background-color 0.2s ease; }
+.whatsapp-btn:hover { background-color: #5c161b; }
+.trinchera-badge, .badge, .manifesto-divider { display: none !important; }
+.amigo-instagram { display: inline-flex; align-items: center; color: #1E1A17; text-decoration: none; font-weight: 500; margin-top: 15px; border: 1px solid rgba(0,0,0,0.15); padding: 6px 12px; border-radius: 4px; }
+.amigo-instagram:hover { background-color: #1E1A17; color: #FAF8F5 !important; }
+
+/* ==========================================================================
+   SECCIÓN EXTRA: EL MANIFIESTO (Hoja de Cuaderno Escrita)
+   ========================================================================== */
+.manifesto-section { padding: 40px 20px; display: flex; justify-content: center; align-items: center; }
+.manifesto-content {
+    position: relative; max-width: 750px; width: 100%; margin: 0 auto;
+    background-color: #FFFFFF !important;
+    background-image: linear-gradient(rgba(197, 222, 239, 0.6) 1px, transparent 1px) !important;
+    background-size: 100% 2.2rem;
+    border-left: 1px solid #e0e0e0;
+    border-radius: 4px 2px 5px 3px;
+    padding: 65px 45px 45px 55px;
+    transform: rotate(1deg);
+    box-shadow: 4px 10px 25px rgba(0, 0, 0, 0.4);
+}
+.manifesto-content p {
+    font-family: var(--font-manuscrita) !important; font-size: 2.1rem; line-height: 2.2rem;
+    color: #1A237E !important; font-weight: 500; text-align: left; margin: 0; letter-spacing: 0.5px;
+}
+.manifesto-content::after {
+    content: ""; position: absolute; top: 0; left: 42px; width: 1px; height: 100%;
+    background-color: rgba(239, 83, 80, 0.6);
+}
+.manifesto-content::before {
+    content: ""; position: absolute; top: 15px; left: 50%; transform: translateX(-50%);
+    width: 24px; height: 24px; z-index: 50;
+    background: radial-gradient(circle at 35% 35%, #ff4d4d, #b30000 70%, #660000);
+    border-radius: 50%;
+    box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* ==========================================================================
+   ESTRUCTURAS ACCESORIAS: NAVBAR, FOOTER Y MODAL
+   ========================================================================== */
+.navbar { display: flex; align-items: center; justify-content: space-between; padding: 15px 40px; background-color: rgba(245, 242, 235, 0.95); border-bottom: 2px solid rgba(30, 26, 23, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: relative; z-index: 100; }
+.nav-identity { display: flex; align-items: center; gap: 10px; }
+.logo-container { width: 70px; height: 70px; border-radius: 50%; border: 1px solid rgba(30, 26, 23, 0.15); display: flex; align-items: center; justify-content: center; background-color: #FAF8F5; overflow: hidden; flex-shrink: 0; }
+.logo-img { width: 75%; height: 75%; object-fit: contain; display: block; }
+.svg-container { width: 400px; height: 110px; overflow: visible; margin-left: 5px; margin-top: -10px; }
+.svg-container svg text, .svg-container svg path { fill: #1E1A17 !important; }
+.nav-menu { display: flex; gap: 35px; align-items: center; }
+.nav-menu a { color: #1E1A17; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; font-size: 0.9rem; text-decoration: none; transition: color 0.3s ease; }
+.nav-menu a:hover { color: var(--color-wine); }
+
+.main-footer { background-color: #1E1A17; color: #FAF8F5; padding: 60px 20px 30px 20px; position: relative; z-index: 90; }
+.footer-container { max-width: 1200px; margin: 0 auto; }
+.footer-columns { display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; margin-bottom: 40px; }
+.footer-logo { font-family: var(--font-headers); font-size: 2.2rem; }
+.footer-description { opacity: 0.7; font-size: 0.95rem; line-height: 1.6; max-width: 320px; }
+.footer-column-title { color: var(--color-sun); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; font-weight: 700; }
+.footer-column ul { list-style: none; }
+.footer-column ul li { margin-bottom: 12px; }
+.footer-link { color: #FAF8F5; text-decoration: none; opacity: 0.8; }
+.footer-link:hover { color: var(--color-sun); opacity: 1; }
+.social-wrapper { display: flex; gap: 12px; }
+.social-icon { display: inline-flex; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255,255,255,0.05); color: #FAF8F5; align-items: center; justify-content: center; text-decoration: none; }
+.social-icon:hover { background-color: #FAF8F5; color: #1E1A17; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; display: flex; justify-content: space-between; font-size: 0.85rem; opacity: 0.6; }
+
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(30, 26, 23, 0.85); display: flex; justify-content: center; align-items: center; z-index: 99999; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+.modal-overlay.mostrar { opacity: 1; pointer-events: auto; }
+.modal-content { position: relative; max-width: 90%; max-height: 85vh; background-color: #FAF8F5; border: 1px solid rgba(30, 26, 23, 0.15); border-radius: 12px; padding: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+.modal-img { display: block; max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 6px; }
+.modal-close-btn { position: absolute; top: 10px; right: 15px; background: transparent; border: none; color: #1E1A17; font-size: 2.2rem; cursor: pointer; opacity: 0.6; transition: all 0.3s ease; }
+.modal-close-btn:hover { opacity: 1; color: var(--color-wine); }
+
+/* ==========================================================================
+   VISTA RESPONSIVE MOBILE OPTIMIZATION
+   ========================================================================== */
+@media (max-width: 768px) {
+    .navbar { flex-direction: column; gap: 15px; padding: 15px; }
+    .svg-container { width: 260px; height: 75px; margin-top: 0; }
+    .nav-menu { gap: 21px; }
+    
+    .catalog-title, .trinchera-title, .section-title-white, .main-header {
+        max-width: 92%;
+        padding: 25px 25px !important;
+    }
+    .catalog-title h1, .main-header h1, .section-title-white h2, .trinchera-title h2 { font-size: 2rem !important; }
+    
+    .manifesto-content { padding: 55px 20px 30px 35px; }
+    .manifesto-content p { font-size: 1.55rem; line-height: 2.2rem; }
+    .manifesto-content::after { left: 28px; }
+
+    .filter-container { gap: 12px; padding: 0 10px; }
+    .filter-btn { padding: 16px 14px 8px 14px !important; font-size: 1.3rem; }
+
+    .events-grid, .catalog-grid, .trinchera-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 0 10px;
+    }
+    .footer-columns { flex-direction: column; text-align: center; }
+    .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+}
+/* ==========================================================================
+   POLAROID "NOSOTROS" AL COSTADO DEL MANIFIESTO
+   ========================================================================== */
+.manifesto-section {
+    position: relative; /* Clave para que la foto se acomode respecto a esta sección */
+    overflow: visible !important;
+}
+
+.polaroid-nosotros {
+    position: absolute;
+    right: 4%; /* Se posiciona a la derecha del texto */
+    top: 50%;
+    transform: translateY(-50%) rotate(4deg); /* Centrada verticalmente y girada */
+    background-color: #FAF8F2 !important;
+    padding: 14px 14px 28px 14px !important;
+    width: 240px; /* Tamaño ideal de marco secundario */
+    box-shadow: 6px 12px 24px rgba(0, 0, 0, 0.45) !important;
+    z-index: 60; /* Por encima del fondo y sutilmente del borde del manifiesto */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Contenedor de la foto (Formato cuadrado clásico) */
+.polaroid-img-container {
+    width: 100%;
+    height: 210px;
+    overflow: hidden;
+    background-color: #EBE7DF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.polaroid-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Epígrafe inferior con tu fuente manuscrita */
+.polaroid-caption {
+    font-family: var(--font-manuscrita) !important;
+    font-size: 1.8rem;
+    color: #1E1A17;
+    text-align: center;
+    margin-top: 12px;
+    font-weight: 700;
+}
+
+/* Efecto Hover para que sea interactiva al pasar el mouse */
+.polaroid-nosotros:hover {
+    transform: translateY(-50%) scale(1.06) rotate(0deg) !important;
+    box-shadow: 10px 20px 35px rgba(0, 0, 0, 0.55) !important;
+    z-index: 99;
+}
+
+/* ==========================================================================
+   PIN ROJO MATEMÁTICO EN EL BORDE DE LA POLAROID
+   ========================================================================== */
+.polaroid-nosotros::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important; /* Clavado exacto en la línea superior del papel */
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important; /* Eje central perfecto */
+    width: 16px !important;
+    height: 16px !important;
+    z-index: 99 !important;
+    background: radial-gradient(circle at 35% 35%, #ff4d4d, #cc0000 60%, #660000) !important;
+    border-radius: 50% !important;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ==========================================================================
+   CONTENEDOR Y ESTILOS PARA EL COLLAGE DE POLAROIDS
+   ========================================================================== */
+.manifesto-section {
+    position: relative;
+    overflow: visible !important;
+}
+
+/* Contenedor general en el ala derecha */
+.polaroids-container {
+    position: absolute;
+    right: 2%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 260px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Separación vertical entre las fotos */
+    z-index: 60;
+}
+
+/* Estilo base de Polaroid unificado */
+.polaroid-nosotros {
+    background-color: #FAF8F2 !important;
+    padding: 14px 14px 24px 14px !important;
+    width: 230px; /* Un toque más compactas para que entren cómodas */
+    box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.4) !important;
+    position: relative !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.1s;
+}
+
+/* --- Foto 01: Inclinada a la derecha --- */
+.polaroid-nosotros.foto-01 {
+    transform: rotate(4deg);
+    z-index: 61;
+}
+
+/* --- Foto 02: Inclinada a la izquierda y ligeramente desplazada --- */
+.polaroid-nosotros.foto-02 {
+    transform: rotate(-3deg) translateX(-15px);
+    z-index: 62; /* Se encabalga levemente sobre la de arriba */
+}
+
+/* Contenedor interno de imagen */
+.polaroid-img-container {
+    width: 100%;
+    height: 195px;
+    overflow: hidden;
+    background-color: #EBE7DF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.polaroid-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Texto manuscrito inferior */
+.polaroid-caption {
+    font-family: var(--font-manuscrita) !important;
+    font-size: 1.7rem;
+    color: #1E1A17;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+/* Hover interactivo individual */
+.polaroid-nosotros:hover {
+    transform: scale(1.08) rotate(0deg) translateX(0) !important;
+    box-shadow: 10px 18px 32px rgba(0, 0, 0, 0.55) !important;
+    z-index: 99 !important; /* Se va al frente al pasar el mouse */
+}
+
+/* ==========================================================================
+   PIN ROJO MATEMÁTICO EN EL BORDE DE AMBAS FOTOS
+   ========================================================================== */
+.polaroid-nosotros::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important; /* Justo en el borde superior del papel */
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 15px !important;
+    height: 15px !important;
+    z-index: 99 !important;
+    background: radial-gradient(circle at 35% 35%, #ff4d4d, #cc0000 60%, #660000) !important;
+    border-radius: 50% !important;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE: PASAR ABAJO EN PANTALLAS CHICAS
+   ========================================================================== */
+@media (max-width: 1100px) {
+    .polaroids-container {
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        transform: translateY(0) !important;
+        width: 100%;
+        flex-direction: row; /* Se ponen una al lado de la otra en mobile */
+        justify-content: center;
+        gap: 20px;
+        margin-top: 40px !important;
+    }
+    
+    .polaroid-nosotros.foto-01 { transform: rotate(3deg); }
+    .polaroid-nosotros.foto-02 { transform: rotate(-2deg) translateX(0); }
+}
+
+@media (max-width: 600px) {
+    .polaroids-container {
+        flex-direction: column; /* Columna limpia si la pantalla es muy angosta */
+        align-items: center;
+    }
+}
+/* ==========================================================================
+   COLLAGE DE POLAROIDS ASIMÉTRICAS (IZQUIERDA Y DERECHA)
+   ========================================================================== */
+.manifesto-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px; /* Le da aire vertical para que no se encimen */
+    padding: 60px 20px;
+    overflow: visible !important;
+}
+
+/* Estilo base de Polaroid unificado */
+.polaroid-nosotros {
+    position: absolute;
+    background-color: #FAF8F2 !important;
+    padding: 14px 14px 24px 14px !important;
+    width: 230px; 
+    box-shadow: 6px 12px 24px rgba(0, 0, 0, 0.45) !important;
+    z-index: 60;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.1s;
+}
+
+/* --- Foto 01: Clavada a la IZQUIERDA --- */
+.polaroid-nosotros.foto-01 {
+    left: 2%;
+    top: 25%; /* Un poco más arriba */
+    transform: rotate(-4deg);
+}
+
+/* --- Foto 02: Clavada a la DERECHA --- */
+.polaroid-nosotros.foto-02 {
+    right: 2%;
+    top: 60%; /* Un poco más abajo para generar dinamismo */
+    transform: rotate(5deg);
+}
+
+/* Contenedor interno de imagen */
+.polaroid-img-container {
+    width: 100%;
+    height: 195px;
+    overflow: hidden;
+    background-color: #EBE7DF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.polaroid-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Texto manuscrito inferior */
+.polaroid-caption {
+    font-family: var(--font-manuscrita) !important;
+    font-size: 1.7rem;
+    color: #1E1A17;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+/* Hover interactivo individual */
+.polaroid-nosotros:hover {
+    transform: scale(1.08) rotate(0deg) !important;
+    box-shadow: 12px 22px 35px rgba(0, 0, 0, 0.55) !important;
+    z-index: 99 !important; /* Se va al frente de todo al pasar el mouse */
+}
+
+/* ==========================================================================
+   PIN ROJO MATEMÁTICO EN EL BORDE DE LAS FOTOS
+   ========================================================================== */
+.polaroid-nosotros::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important; /* Justo en el borde superior del papel */
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 15px !important;
+    height: 15px !important;
+    z-index: 99 !important;
+    background: radial-gradient(circle at 35% 35%, #ff4d4d, #cc0000 60%, #660000) !important;
+    border-radius: 50% !important;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE: DISPOSICIÓN PARA PANTALLAS MEDIANAS Y CHICAS
+   ========================================================================== */
+@media (max-width: 1150px) {
+    .manifesto-section {
+        flex-direction: column !important;
+        gap: 30px;
+        min-height: auto;
+    }
+    
+    .polaroid-nosotros {
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        margin: 10px auto !important;
+    }
+    
+    .polaroid-nosotros.foto-01 { transform: rotate(-2deg); }
+    .polaroid-nosotros.foto-02 { transform: rotate(3deg); }
+}
+
+/* ==========================================================================
+   STICKER DE VINILO REALISTA - POSICIÓN: ABAJO A LA DERECHA
+   ========================================================================== */
+.sticker-logo {
+    position: absolute;
+    /* Lo anclamos abajo a la derecha respecto a la sección del manifiesto */
+    right: 14%; 
+    bottom: 8%;
+    width: 110px; /* Tamaño de sticker de vinilo */
+    height: 110px;
+    z-index: 75; /* Por encima del manifiesto y levemente de la Polaroid derecha */
+    
+    /* Efecto troquelado blanco */
+    background-color: #ffffff !important;
+    padding: 8px !important;
+    border-radius: 50% !important; 
+    
+    /* Sombra de papel plano adherido al corcho */
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.5) !important;
+    
+    /* Rotación hacia la derecha para cambiar el ángulo */
+    transform: rotate(10deg); 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.sticker-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Efecto hover */
+.sticker-logo:hover {
+    transform: rotate(6deg) scale(1.08) !important;
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE AJUSTADO
+   ========================================================================== */
+@media (max-width: 1400px) {
+    .sticker-logo {
+        right: 4%; /* Lo pega un toque más al borde si la pantalla se achica */
+        bottom: 5%;
+        width: 95px;
+        height: 95px;
+    }
+}
+
+@media (max-width: 1150px) {
+    .sticker-logo {
+        position: relative !important;
+        right: auto !important;
+        bottom: auto !important;
+        /* En mobile vuelve al flujo abajo de las fotos con un margen limpio */
+        margin: 30px auto 10px auto !important; 
+        transform: rotate(6deg);
+        display: block;
+    }
+}
+/* Asegura que el contenedor de la página independiente use todo el alto disponible */
+.infocracia-section-page {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px); /* Resta el alto estimado del header */
+    padding: 60px 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+    overflow: visible !important;
+}
+
+/* Indicador visual en el menú para saber en qué página estás parado */
+.main-nav a.active {
+    border-bottom: 2px solid var(--color-wine, #660000);
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   SECCIÓN INFOCRACIA: HOJA DE CUADERNO + POLAROID DINÁMICA
+   ========================================================================== */
+.infocracia-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 550px;
+    padding: 80px 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+    overflow: visible !important;
+}
+
+/* Etiqueta superior estilo sticker identificatorio */
+.infocracia-header-label {
+    position: absolute;
+    top: 25px;
+    left: 15%;
+    font-family: var(--font-headers);
+    background-color: var(--color-wine);
+    color: #FAF8F5;
+    padding: 6px 16px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transform: rotate(-3deg);
+    box-shadow: 2px 4px 8px rgba(0,0,0,0.25);
+    z-index: 80;
+}
+
+/* LA HOJA RAYADA (Estilo Manifiesto) */
+.infocracia-notebook-paper {
+    position: relative;
+    max-width: 700px;
+    width: 100%;
+    background-color: #FFFFFF !important;
+    /* Gradiente lineal para simular los renglones azules/grises */
+    background-image: linear-gradient(rgba(197, 222, 239, 0.5) 1px, transparent 1px) !important;
+    background-size: 100% 2.2rem;
+    border-left: 1px solid #e0e0e0;
+    border-radius: 4px 2px 5px 3px;
+    padding: 65px 50px 45px 65px; /* Más padding izquierdo para respetar el margen */
+    transform: rotate(-0.5deg);
+    box-shadow: 4px 12px 28px rgba(0, 0, 0, 0.38);
+    z-index: 10;
+}
+
+/* Margen rojo vertical del cuaderno */
+.infocracia-notebook-paper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 45px;
+    width: 1px;
+    height: 100%;
+    background-color: rgba(239, 83, 80, 0.5);
+}
+
+/* Estilo de los textos cargados dinámicamente */
+#infocracia-text-content p {
+    font-family: var(--font-manuscrita) !important;
+    font-size: 2rem;
+    line-height: 2.2rem;
+    color: #1A237E !important; /* Azul tinta clásica escolar */
+    font-weight: 500;
+    text-align: left;
+    margin: 0 0 2.2rem 0;
+    letter-spacing: 0.5px;
+}
+
+/* PIN ROJO ANCLADO AL BORDE SUPERIOR DE LA HOJA */
+.infocracia-notebook-paper::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 22px;
+    height: 22px;
+    z-index: 99 !important;
+    background: radial-gradient(circle at 35% 35%, #ff4d4d, #cc0000 60%, #660000) !important;
+    border-radius: 50% !important;
+    box-shadow: 2px 5px 6px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ==========================================================================
+   POLAROID LATERAL (fotoNota01.png)
+   ========================================================================== */
+.infocracia-polaroid {
+    position: absolute;
+    right: 3%;
+    top: 45%;
+    transform: translateY(-50%) rotate(5deg);
+    background-color: #FAF8F2 !important;
+    padding: 14px 14px 24px 14px !important;
+    width: 230px;
+    box-shadow: 6px 14px 26px rgba(0, 0, 0, 0.42) !important;
+    z-index: 20; /* Queda levemente por encima de la hoja de papel */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.infocracia-img-container {
+    width: 100%;
+    height: 195px;
+    overflow: hidden;
+    background-color: #EBE7DF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.infocracia-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.infocracia-caption {
+    font-family: var(--font-manuscrita) !important;
+    font-size: 1.6rem;
+    color: #1E1A17;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+/* Alfiler propio para la Polaroid */
+.infocracia-polaroid::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 15px;
+    height: 15px;
+    z-index: 99 !important;
+    background: radial-gradient(circle at 35% 35%, #ff4d4d, #cc0000 60%, #660000) !important;
+    border-radius: 50% !important;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* Efecto Hover interactivo */
+.infocracia-polaroid:hover {
+    transform: translateY(-50%) scale(1.08) rotate(0deg) !important;
+    box-shadow: 12px 24px 38px rgba(0, 0, 0, 0.55) !important;
+    z-index: 99 !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE: ADAPTACIÓN PARA DISPOSITIVOS MÓVILES
+   ========================================================================== */
+@media (max-width: 1200px) {
+    .infocracia-section {
+        flex-direction: column !important;
+        gap: 40px;
+        min-height: auto;
+    }
+    .infocracia-header-label {
+        left: 5%;
+        top: 15px;
+    }
+    .infocracia-polaroid {
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        transform: translateY(0) rotate(-3deg) !important;
+        margin: 20px auto 0 auto !important;
+    }
+    .infocracia-polaroid:hover {
+        transform: scale(1.08) rotate(0deg) !important;
+    }
+    .infocracia-notebook-paper {
+        padding: 55px 30px 35px 50px;
+    }
+}
+/* Contenedor en cuadrícula para separar Menú de la Hoja */
+.infocracia-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 50px;
+    max-width: 1300px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Columna de Polaroids */
+.infocracia-menu {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    width: 300px;
+    padding-top: 50px;
+}
+
+/* Columna de la Hoja */
+.infocracia-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Redefinimos la Polaroid como elemento clickeable del menú */
+.infocracia-polaroid {
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+    transform: translateY(0) rotate(-2deg);
+    background-color: #FAF8F2 !important;
+    padding: 12px 12px 20px 12px !important;
+    width: 210px;
+    box-shadow: 4px 8px 18px rgba(0, 0, 0, 0.3) !important;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+/* Variamos levemente las rotaciones de cada una para que parezcan clavadas a mano */
+.infocracia-menu .infocracia-polaroid:nth-child(2) { transform: rotate(-3deg); }
+.infocracia-menu .infocracia-polaroid:nth-child(3) { transform: rotate(4deg); }
+.infocracia-menu .infocracia-polaroid:nth-child(4) { transform: rotate(-2deg); }
+
+/* Efecto hover interactivo */
+.infocracia-polaroid:hover {
+    transform: scale(1.05) rotate(0deg) !important;
+    box-shadow: 8px 16px 28px rgba(0, 0, 0, 0.4) !important;
+    z-index: 50;
+}
+
+/* Estilo para la Polaroid que está actualmente seleccionada */
+.infocracia-polaroid.active {
+    border: 2px solid var(--color-wine, #852229);
+    transform: scale(1.03) rotate(1deg) !important;
+    box-shadow: 6px 12px 22px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* Responsive para pantallas chicas: se apilan en vertical */
+@media (max-width: 1024px) {
+    .infocracia-container {
+        flex-direction: column !important;
+        align-items: center;
+        gap: 40px;
+    }
+    .infocracia-menu {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        gap: 20px;
+    }
+}
+.wine-card {
+    /* ... tus estilos actuales ... */
+    filter: url(#papel-arrugado) drop-shadow(4px 4px 10px rgba(0,0,0,0.25));
+    /* Nota: Remové cualquier rotación en hover para que no parpadee el filtro */
+}
+
+

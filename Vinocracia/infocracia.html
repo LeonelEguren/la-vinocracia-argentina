@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infocracia - Cultura del Vino</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<nav class="navbar">
+        <div class="nav-identity">
+            <div class="logo-container">
+                <img src="img/Main/logo01.png" alt="Damajuana" class="logo-img">
+            </div>
+
+            <div class="svg-container">
+                <svg viewBox="0 0 400 110" width="100%" height="100%">
+                    <defs>
+                        <path id="mixCurveLa" d="M 20,45 L 90,22" fill="transparent" />
+                        <path id="mixCurveVinocracia" d="M 15,95 L 290,45" fill="transparent" />
+                        <filter id="mixTextShadow" x="-10%" y="-10%" width="120%" height="120%">
+                            <feDropShadow dx="1" dy="1.5" stdDeviation="0.8" flood-color="#000000" flood-opacity="0.2" />
+                        </filter>
+                    </defs>
+                    <text font-family="'Caveat', cursive" font-size="38" font-weight="900" fill="#1a1a1a" filter="url(#mixTextShadow)">
+                        <textPath href="#mixCurveLa" startOffset="0%">La</textPath>
+                    </text>
+                    <text font-family="'Caveat', cursive" font-size="44" font-weight="900" fill="#1a1a1a" filter="url(#mixTextShadow)" letter-spacing="0.5px">
+                        <textPath href="#mixCurveVinocracia" startOffset="0%">Vinocracia</textPath>
+                    </text>
+                </svg>
+            </div>
+        </div>
+
+        <div class="nav-menu">
+            <a href="#eventos">Eventos</a>
+            <a href="#catalogo">Catálogo</a>
+            <a href="index.html">Inicio</a>
+        </div>
+    </nav>
+    
+   
+</nav>
+    </div>
+</header>
+
+<main class="main-board">
+    <section class="infocracia-container">
+        
+        <!-- COLUMNA IZQUIERDA: MENÚ DE POLAROIDS SELECCIONABLES -->
+        <div class="infocracia-menu">
+            <div class="infocracia-header-label">Infocracia</div>
+            
+            <!-- Polaroid 1: Finca Suárez -->
+            <div class="infocracia-polaroid active" onclick="cargarNota('infocracia/nota1.txt', this)">
+                <div class="infocracia-img-container">
+                    <img src="infocracia/fotoNota01.png" alt="Finca Suárez" class="infocracia-photo">
+                </div>
+                <div class="infocracia-caption">Finca Suárez</div>
+            </div>
+
+            <!-- Polaroid 2: Bares -->
+            <div class="infocracia-polaroid" onclick="cargarNota('infocracia/nota2.txt', this)">
+                <div class="infocracia-img-container">
+                    <img src="img/Main/logo01.png" alt="Bares de Vino" class="infocracia-photo" onerror="this.src='img/Main/logo01.png'; this.style.objectFit='contain';">
+                </div>
+                <div class="infocracia-caption">Bares</div>
+            </div>
+
+            <!-- Polaroid 3: Dónde comer -->
+            <div class="infocracia-polaroid" onclick="cargarNota('infocracia/nota3.txt', this)">
+                <div class="infocracia-img-container">
+                    <img src="img/Main/logo01.png" alt="Dónde Comer" class="infocracia-photo" onerror="this.src='img/Main/logo01.png'; this.style.objectFit='contain';">
+                </div>
+                <div class="infocracia-caption">Dónde comer</div>
+            </div>
+        </div>
+
+        <!-- COLUMNA DERECHA: LA HOJA RAYADA QUE MUESTRA LA NOTA SELECCIONADA -->
+        <div class="infocracia-content">
+            <div class="infocracia-notebook-paper">
+                <div id="infocracia-text-content">
+                    <p>Seleccioná una nota del tablero para leer...</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</main>
+
+<script>
+    const notasTexto = {
+        'infocracia/nota1.txt': `Finca Suárez es uno de los secretos mejor guardados y más respetados de Altamira, en el corazón del Valle de Uco, Mendoza. Conducido por Juanfa Suárez, este proyecto familiar destaca por recuperar la tradición vitivinícola de sus antepasados bajo una mirada de mínima intervención y un profundo respeto por el entorno. El viñedo, plantado sobre suelos calcáreos, pedregosos y arenosos característicos de la zona, se beneficia de la altitud y de la gran amplitud térmica para dar vida a uvas de una sanidad y concentración excepcionales.
+
+La filosofía de elaboración de la bodega se aleja deliberadamente de las maderas pesadas y la sobremaduración para enfocarse en la pureza de la fruta y la expresión del terroir. Sus vinos —donde sobresalen un Malbec icónico, un Cabernet Franc vibrante y un Chardonnay de notable tipicidad— se caracterizan por una marcada frescura, elegancia y una acidez natural que les otorga una tensión envidiable en boca. El uso sutil de barricas usadas y piletas de hormigón permite que la mineralidad calcárea de Altamira sea la verdadera protagonista en cada botella.
+
+En definitiva, las reseñas y críticas del mundo entero coinciden en que Finca Suárez elabora vinos con una identidad y un sentido de lugar asombrosos. Son etiquetas ideales para los amantes de la cultura del vino que buscan autenticidad, fluidez y un reflejo fiel del suelo pedregoso mendocino. Una parada obligatoria en el radar si querés entender hacia dónde van los proyectos modernos que rinden culto al paisaje sin perder la elegancia clásica.`,
+        'infocracia/nota2.txt': 'Próximamente más contenido para esta nota.',
+        'infocracia/nota3.txt': 'Próximamente más contenido para esta nota.'
+    };
+
+    function renderizarTexto(texto) {
+        const parrafos = texto.split('\n').filter(parrafo => parrafo.trim() !== '').map(p => `<p>${p}</p>`).join('');
+        document.getElementById('infocracia-text-content').innerHTML = parrafos;
+    }
+
+    function cargarNota(rutaArchivo, elementoPolaroid) {
+        // 1. Cambiar la clase activa visualmente en las Polaroids
+        document.querySelectorAll('.infocracia-polaroid').forEach(p => p.classList.remove('active'));
+        if(elementoPolaroid) {
+            elementoPolaroid.classList.add('active');
+        }
+
+        // 2. Intentar primero con el contenido embebido para que funcione al abrir el archivo localmente
+        if (notasTexto[rutaArchivo]) {
+            renderizarTexto(notasTexto[rutaArchivo]);
+            return;
+        }
+
+        fetch(rutaArchivo)
+            .then(response => {
+                if (!response.ok) throw new Error("No se pudo cargar la nota seleccionada.");
+                return response.text();
+            })
+            .then(data => {
+                renderizarTexto(data);
+            })
+            .catch(error => {
+                console.error(error);
+                document.getElementById('infocracia-text-content').innerHTML = "<p>Contenido no disponible momentáneamente.</p>";
+            });
+    }
+
+    // Al cargar la página por primera vez, abrimos automáticamente Finca Suárez
+    document.addEventListener("DOMContentLoaded", function() {
+        cargarNota('infocracia/nota1.txt', document.querySelector('.infocracia-polaroid'));
+    });
+</script>
+</body>
+</html>
