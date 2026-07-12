@@ -277,9 +277,14 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
     transform: rotate(1deg);
     box-shadow: 4px 10px 25px rgba(0, 0, 0, 0.4);
 }
+
 .manifesto-content p {
-    font-family: var(--font-manuscrita) !important; font-size: 2.1rem; line-height: 2.2rem;
-    color: #1A237E !important; font-weight: 500; text-align: left; margin: 0; letter-spacing: 0.5px;
+    font-family: 'Montserrat', sans-serif !important; /* Usamos la nueva fuente */
+    font-size: 1.1rem !important; /* Tamaño más legible y moderno */
+    line-height: 1.7 !important; /* Espaciado entre líneas cómodo */
+    color: #3a332d !important; /* Color de texto oscuro y cálido */
+    font-weight: 500 !important;
+    text-align: center !important; /* Centrado para que acompañe el diseño */
 }
 .manifesto-content::after {
     content: ""; position: absolute; top: 0; left: 42px; width: 1px; height: 100%;
@@ -325,13 +330,118 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
 .social-icon:hover { background-color: #FAF8F5; color: #1E1A17; }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; display: flex; justify-content: space-between; font-size: 0.85rem; opacity: 0.6; }
 
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(30, 26, 23, 0.85); display: flex; justify-content: center; align-items: center; z-index: 99999; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
-.modal-overlay.mostrar { opacity: 1; pointer-events: auto; }
-.modal-content { position: relative; max-width: 90%; max-height: 85vh; background-color: #FAF8F5; border: 1px solid rgba(30, 26, 23, 0.15); border-radius: 12px; padding: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
-.modal-img { display: block; max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 6px; }
-.modal-close-btn { position: absolute; top: 10px; right: 15px; background: transparent; border: none; color: #1E1A17; font-size: 2.2rem; cursor: pointer; opacity: 0.6; transition: all 0.3s ease; }
-.modal-close-btn:hover { opacity: 1; color: var(--color-wine); }
+/* ==========================================================================
+   MODAL DE BIENVENIDA: FIJO Y CORREGIDO
+   ========================================================================== */
 
+/* Fondo oscurecido completo */
+.modal-overlay { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh; 
+    background-color: rgba(30, 26, 23, 0.85); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 99999; 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.4s ease; 
+}
+
+/* Clase que activa el JavaScript para mostrarlo */
+.modal-overlay.mostrar { 
+    opacity: 1; 
+    pointer-events: auto; 
+}
+
+/* La Tarjeta Contenedora (Corregida para que encierre todo el texto) */
+.modal-card-comunidad { 
+    position: relative; 
+    width: 90%;
+    max-width: 420px; 
+    background-color: #FAF8F5; /* Fondo marfil del modal original */
+    border: 1px solid rgba(30, 26, 23, 0.15); 
+    border-radius: 12px; 
+    padding: 35px 25px; 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Botón de cerrar (X) */
+.modal-close-btn { 
+    position: absolute; 
+    top: 10px; 
+    right: 15px; 
+    background: transparent; 
+    border: none; 
+    color: #1E1A17; 
+    font-size: 2.2rem; 
+    cursor: pointer; 
+    opacity: 0.6; 
+    transition: all 0.3s ease; 
+}
+.modal-close-btn:hover { 
+    opacity: 1; 
+    color: var(--color-wine, #852229); 
+}
+
+/* Logo de la Damajuana */
+.modal-comunidad-logo {
+    width: 160px; /* Aumentado (antes solía estar entre 60px y 80px) */
+    height: auto;
+    margin: 0 auto 20px auto; /* Centrado y con aire respecto al título */
+    display: block;
+    object-fit: contain;
+}
+
+.modal-comunidad-body h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700; /* Gruesa como la de la imagen */
+    font-size: 1.8rem;
+    color: #2b1b17; /* El tono marrón oscuro/negro suave del diseño */
+    margin-top: 5px;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px; /* Sutilmente junta las letras como en el original */
+}
+
+.modal-call-action {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 0.95rem;
+    color: #555555;
+    line-height: 1.4;
+    margin-bottom: 25px;
+}
+
+/* Botón Estilizado de WhatsApp (Para que no se vea como un link común) */
+.modal-comunidad-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--color-wine, #852229);
+    color: #ffffff !important;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 12px 20px;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(133, 34, 41, 0.2);
+    transition: all 0.2s ease;
+}
+
+.modal-comunidad-btn:hover {
+    background-color: #691a1f;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(133, 34, 41, 0.35);
+}
 /* ==========================================================================
    VISTA RESPONSIVE MOBILE OPTIMIZATION
    ========================================================================== */
