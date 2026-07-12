@@ -330,11 +330,6 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
 .social-icon:hover { background-color: #FAF8F5; color: #1E1A17; }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; display: flex; justify-content: space-between; font-size: 0.85rem; opacity: 0.6; }
 
-/* ==========================================================================
-   MODAL DE BIENVENIDA: FIJO Y CORREGIDO
-   ========================================================================== */
-
-/* Fondo oscurecido completo */
 .modal-overlay { 
     position: fixed; 
     top: 0; 
@@ -342,109 +337,102 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
     width: 100vw; 
     height: 100vh; 
     background-color: rgba(30, 26, 23, 0.85); 
-    display: flex; 
+    display: none; /* ← ESTO es lo que hace que no se meta adentro del index al cargar */
     justify-content: center; 
     align-items: center; 
-    z-index: 99999; 
-    opacity: 0; 
-    pointer-events: none; 
-    transition: opacity 0.4s ease; 
+    z-index: 99999; /* Se asegura de flotar arriba de todo el contenido */
 }
-
-/* Clase que activa el JavaScript para mostrarlo */
 .modal-overlay.mostrar { 
-    opacity: 1; 
-    pointer-events: auto; 
+    display: flex !important; 
 }
-
-/* La Tarjeta Contenedora (Corregida para que encierre todo el texto) */
 .modal-card-comunidad { 
     position: relative; 
     width: 90%;
-    max-width: 420px; 
-    background-color: #FAF8F5; /* Fondo marfil del modal original */
+    max-width: 400px; /* Reducimos sutilmente el ancho para equilibrar la forma */
+    background-color: #FAF8F5; 
     border: 1px solid rgba(30, 26, 23, 0.15); 
-    border-radius: 12px; 
-    padding: 35px 25px; 
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+    border-radius: 24px; 
+    padding: 30px 25px 25px 25px; /* Reducción real de aire arriba y abajo */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4); 
     text-align: center;
     box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif; /* Forzamos Montserrat a toda la tarjeta */
 }
 
-/* Botón de cerrar (X) */
-.modal-close-btn { 
-    position: absolute; 
-    top: 10px; 
-    right: 15px; 
-    background: transparent; 
-    border: none; 
-    color: #1E1A17; 
-    font-size: 2.2rem; 
-    cursor: pointer; 
-    opacity: 0.6; 
-    transition: all 0.3s ease; 
+/* Botón de cerrar (la X) */
+.modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease;
 }
-.modal-close-btn:hover { 
-    opacity: 1; 
-    color: var(--color-wine, #852229); 
+.modal-close-btn:hover {
+    color: #1E1A17;
 }
 
-/* Logo de la Damajuana */
+/* El Logo Grande y con Buena Presencia */
 .modal-comunidad-logo {
-    width: 160px; /* Aumentado (antes solía estar entre 60px y 80px) */
+    width: 130px; /* Tamaño ideal: imponente pero sin estirar el modal hacia abajo */
     height: auto;
-    margin: 0 auto 20px auto; /* Centrado y con aire respecto al título */
-    display: block;
     object-fit: contain;
+    margin: 0 auto 5px auto;
+    display: inline-block;
 }
 
+/* Título Montserrat Bold con espacios compactos */
 .modal-comunidad-body h2 {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 700; /* Gruesa como la de la imagen */
-    font-size: 1.8rem;
-    color: #2b1b17; /* El tono marrón oscuro/negro suave del diseño */
+    font-weight: 700;
+    font-size: 1.75rem; /* Ajustamos un pelín el tamaño para que no quiebre toscamente */
+    color: #2b1b17;
     margin-top: 5px;
-    margin-bottom: 12px;
-    letter-spacing: -0.5px; /* Sutilmente junta las letras como en el original */
+    margin-bottom: 15px; /* Espacio controlado con el QR */
+    letter-spacing: -0.5px;
+    line-height: 1.2;
 }
 
+/* El enlace y contenedor del QR */
+.modal-qr-link {
+    display: inline-block;
+    margin-bottom: 15px; /* Reducido para acortar el largo total */
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+.modal-qr-link:hover {
+    transform: scale(1.02);
+}
+
+/* Tamaño del QR equilibrado */
+.modal-qr-img {
+    width: 180px; /* Reducido de 210px a 180px para compactar el largo del modal */
+    height: 180px;
+    object-fit: contain;
+    display: block;
+    background: white;
+    padding: 8px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+/* Texto de bajada inferior en Montserrat */
 .modal-call-action {
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: #555555;
     line-height: 1.4;
-    margin-bottom: 25px;
+    margin: 0 auto;
+    max-width: 290px;
 }
-
-/* Botón Estilizado de WhatsApp (Para que no se vea como un link común) */
-.modal-comunidad-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background-color: var(--color-wine, #852229);
-    color: #ffffff !important;
-    text-decoration: none;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-    padding: 12px 20px;
-    border-radius: 8px;
-    width: 100%;
-    box-sizing: border-box;
-    box-shadow: 0 4px 12px rgba(133, 34, 41, 0.2);
-    transition: all 0.2s ease;
-}
-
-.modal-comunidad-btn:hover {
-    background-color: #691a1f;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 15px rgba(133, 34, 41, 0.35);
-}
-/* ==========================================================================
+/*==================================================
    VISTA RESPONSIVE MOBILE OPTIMIZATION
-   ========================================================================== */
+ ========================================================================== */
 @media (max-width: 768px) {
     .navbar { flex-direction: column; gap: 15px; padding: 15px; }
     .svg-container { width: 260px; height: 75px; margin-top: 0; }
