@@ -302,6 +302,10 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
 .logo-img { width: 75%; height: 75%; object-fit: contain; display: block; }
 .svg-container { width: 400px; height: 110px; overflow: visible; margin-left: 5px; margin-top: -10px; }
 .svg-container svg text, .svg-container svg path { fill: #1E1A17 !important; }
+.nav-brand-link {
+    text-decoration: none; /* Quita el subrayado del enlace */
+    color: inherit; /* Hereda el color del texto para que no se ponga azul */
+}
 .nav-menu { display: flex; gap: 35px; align-items: center; }
 .nav-menu a { color: #1E1A17; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; font-size: 0.9rem; text-decoration: none; transition: color 0.3s ease; }
 .nav-menu a:hover { color: var(--color-wine); }
@@ -993,5 +997,3 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
     filter: url(#papel-arrugado) drop-shadow(4px 4px 10px rgba(0,0,0,0.25));
     /* Nota: Remové cualquier rotación en hover para que no parpadee el filtro */
 }
-
-

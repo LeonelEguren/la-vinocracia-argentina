@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Vinocracia — Latinoamérica en la Mesa</title>
+    <title>La Vinocracia</title>
+    
+    <link rel="icon" href="img/Main/logo01.png" type="image/png">
     
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght=700;900&family=Plus+Jakarta+Sans:wght=400;500;600;700;800&display=swap" rel="stylesheet">
     
@@ -13,37 +15,11 @@
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-identity">
-            <div class="logo-container">
-                <img src="img/Main/logo01.png" alt="Damajuana" class="logo-img">
-            </div>
+    <!-- El contenedor del navbar se cargará aquí -->
+    <div id="navbar-container"></div>
 
-            <div class="svg-container">
-                <svg viewBox="0 0 400 110" width="100%" height="100%">
-                    <defs>
-                        <path id="mixCurveLa" d="M 20,45 L 90,22" fill="transparent" />
-                        <path id="mixCurveVinocracia" d="M 15,95 L 290,45" fill="transparent" />
-                        <filter id="mixTextShadow" x="-10%" y="-10%" width="120%" height="120%">
-                            <feDropShadow dx="1" dy="1.5" stdDeviation="0.8" flood-color="#000000" flood-opacity="0.2" />
-                        </filter>
-                    </defs>
-                    <text font-family="'Caveat', cursive" font-size="38" font-weight="900" fill="#1a1a1a" filter="url(#mixTextShadow)">
-                        <textPath href="#mixCurveLa" startOffset="0%">La</textPath>
-                    </text>
-                    <text font-family="'Caveat', cursive" font-size="44" font-weight="900" fill="#1a1a1a" filter="url(#mixTextShadow)" letter-spacing="0.5px">
-                        <textPath href="#mixCurveVinocracia" startOffset="0%">Vinocracia</textPath>
-                    </text>
-                </svg>
-            </div>
-        </div>
-
-        <div class="nav-menu">
-            <a href="#eventos">Eventos</a>
-            <a href="#catalogo">Catálogo</a>
-            <a href="infocracia.html">INFOCRACIA</a>
-        </div>
-    </nav>
+    <!-- El contenedor del modal se cargará aquí -->
+    <div id="modal-container"></div>
 
     <!-- HEADER: Ahora actúa como sección base y contiene al Post-it unificado -->
     <header class="hero-section">
@@ -75,8 +51,15 @@
     <div class="sticker-logo">
         <img src="img/Main/logo01.png" alt="Sticker Vinilo" class="sticker-img">
 </section>
+ <section id="mendoza" class="events-section">
+        <div class="events-container">
+            <!-- POST-IT ENCUENTROS -->
+            <div class="section-title-white">
+                <h2>Mendoza </h2>
+                <h3 class="event-title">Seccion en construcción</h3>
+            </div>
 
-    <section id="eventos" class="events-section">
+    <section id="encuentros" class="events-section">
         <div class="events-container">
             <!-- POST-IT ENCUENTROS -->
             <div class="section-title-white">
@@ -142,9 +125,9 @@
     <!-- SECCIÓN: ALMACÉN (PRODUCTOS)               -->
     <!-- ========================================== -->
    
-<section class="catalog-section">
+<section id="kioskito" class="catalog-section">
      <div class="catalog-title">
-        <h2 >Almacén Vinócrata</h2>
+        <h2 >Kioskito</h2>
         </div>
         <div class="filter-container">
             <button class="filter-btn active" data-filter="all">Todos</button>
@@ -157,24 +140,9 @@
         <div class="catalog-grid" id="catalogGrid"></div>
     </section>
 
-    </div> </main> <script src="productos.js"></script>
-<script>
+    <script src="productos.js"></script>
+    <script>
     document.addEventListener("DOMContentLoaded", () => {
-        // --- 1. LÓGICA DEL MODAL ---
-        const modal = document.getElementById("welcomeModal");
-        const btnCerrar = document.getElementById("closeModal");
-
-        setTimeout(() => {
-            if (modal) modal.classList.add("mostrar");
-        }, 500);
-
-        if (btnCerrar) btnCerrar.addEventListener("click", () => modal.classList.remove("mostrar"));
-        if (modal) {
-            modal.addEventListener("click", (e) => {
-                if (e.target === modal) modal.classList.remove("mostrar");
-            });
-        }
-
         // --- 2. RENDERIZADO FILTRADO POR CATEGORÍA ESPECÍFICA ---
         const catalogGrid = document.getElementById("catalogGrid");
         const filterButtons = document.querySelectorAll(".filter-btn");
@@ -237,8 +205,37 @@
 
         // Ejecución inicial
         renderProducts("all");
+
+        // --- CARGA DE COMPONENTES MODULARES ---
+
+        // Carga el navbar en el contenedor
+        fetch('navbar.html')
+            .then(res => res.text())
+            .then(text => {
+                document.getElementById('navbar-container').innerHTML = text;
+            });
+
+        // Carga el modal en su contenedor y luego el script que lo controla
+        fetch('modal.html')
+            .then(res => res.text())
+            .then(text => {
+                document.getElementById('modal-container').innerHTML = text;
+                const modalScript = document.createElement('script');
+                modalScript.src = 'modal.js';
+                document.body.appendChild(modalScript);
+            });
     });
-</script>
+    </script>
+
+ <section id="deOrigen" class="events-section">
+        <div class="events-container">
+            <!-- POST-IT ENCUENTROS -->
+            <div class="section-title-white">
+                <h2>De Origen </h2>
+                <h3 class="event-title">Seccion en construcción</h3>
+            </div>
+
+
     <!-- ========================================== -->
     <!-- COMPONENTE: AMIGOS EN LA TRINCHERA         -->
     <!-- ========================================== -->
@@ -301,8 +298,17 @@
                 <div class="footer-column links">
                     <h4 class="footer-column-title">Navegación</h4>
                     <ul>
-                        <li><a href="#eventos" class="footer-link">Próximos Encuentros</a></li>
-                        <li><a href="#catalogo" class="footer-link">Almacén de Vinos</a></li>
+                        <li><a href="#mendoza" class="footer-link">Mendoza</a></li>
+                        <li><a href="#encuentros" class="footer-link">Encuentros</a></li>
+                        <li><a href="#kioskito" class="footer-link">Kioskito</a></li>
+                        <li><a href="#deOrigen" class="footer-link">De Origen</a></li>
+                        <li><a href="laBiblioteca.html" class="footer-link">La Biblioteca</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column contact-social">
+                    <h4 class="footer-column-title">Contacto</h4>
+                    <p class="footer-text">
                     </ul>
                 </div>
 
@@ -331,113 +337,14 @@
                 <p>&copy; 2026 Sur Moderno. Todos los derechos reservados.</p>
     
     <p class="developer-signature">
-        Desarrollado por <span>Bilbocho soluciones digitales</span>
+        Desarrollado por <span>Bilba Design</span>
     </p>
                 <div class="legal-notice">
-                    Beber con moderación. Prohibida su venta a menores de 18 años.
+                    Beber con moderación. Prohibida su venta a menores de 18 años. 
                 </div>
             </div>
         </div>
     </footer>
-
-    <div id="welcomeModal" class="modal-overlay">
-        <div class="modal-content">
-            <button id="closeModal" class="modal-close-btn">&times;</button>
-            <img src="img/eventos/evento1.png" alt="Próximo Evento - La Vinocracia" class="modal-img">
-        </div>
-    </div>
-
-   <script src="productos.js"></script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // --- 1. LÓGICA DEL MODAL (Mantenemos tu funcionalidad original) ---
-        const modal = document.getElementById("welcomeModal");
-        const btnCerrar = document.getElementById("closeModal");
-
-        setTimeout(() => {
-            if (modal) modal.classList.add("mostrar");
-        }, 500);
-
-        if (btnCerrar) {
-            btnCerrar.addEventListener("click", () => modal.classList.remove("mostrar"));
-        }
-        if (modal) {
-            modal.addEventListener("click", (evento) => {
-                if (evento.target === modal) modal.classList.remove("mostrar");
-            });
-        }
-
-        // --- 2. RENDERIZADO DINÁMICO DEL CATÁLOGO ---
-        const catalogGrid = document.getElementById("catalogGrid");
-        const filterButtons = document.querySelectorAll(".filter-btn");
-
-  function renderProducts(filterValue = "all") {
-    if (!catalogGrid) return;
-    
-    catalogGrid.innerHTML = ""; 
-
-    // Filtramos comparando contra la propiedad 'categoria' de cada producto
-    const filtrados = filterValue === "all" 
-        ? productos 
-        : productos.filter(prod => prod.categoria === filterValue);
-
-    if (filtrados.length === 0) {
-        catalogGrid.innerHTML = `<p class="no-products" style="grid-column: 1/-1; font-family: var(--font-body); text-align: center; color: white; padding: 20px;">Próximamente más ingresos en esta categoría.</p>`;
-        return;
-    }
-
-    filtrados.forEach(prod => {
-        const card = document.createElement("div");
-        
-        // Forzamos la clase 'wine-card' y el 'data-category' exacto para que el CSS viejo lo tome
-        card.className = "wine-card";
-        card.setAttribute("data-category", prod.categoria);
-        
-        const mensajeWa = encodeURIComponent(`¡Hola! Me interesa consultar por el producto: ${prod.nombre}`);
-        const urlWhatsapp = `https://wa.me/5491130604617?text=${mensajeWa}`;
-
-        // Armamos el HTML interno respetando las clases originales para que no pierda estilos
-        card.innerHTML = `
-            <div class="wine-img-container">
-                <img src="${prod.imagen}" alt="${prod.nombre}" class="wine-img">
-                ${prod.categoria !== 'copa' ? `<span class="badge badge-teal">${prod.categoria.toUpperCase()}</span>` : ''}
-                ${!prod.disponible ? '<span class="badge badge-error" style="background: #852229; color: white; font-weight: bold;">Sin Stock</span>' : ''}
-            </div>
-            <div class="wine-details">
-                <div>
-                    <span class="wine-category">${prod.tipo.toUpperCase()}</span>
-                    <h3 class="wine-title">${prod.nombre}</h3>
-                    <p class="wine-description">${prod.descripcion}</p>
-                </div>
-                <div>
-                    ${prod.disponible ? '<div class="wine-price">Consultar</div>' : '<div class="wine-price" style="color: #852229;">Agotado</div>'}
-                    <a href="${urlWhatsapp}" target="_blank" class="whatsapp-btn">
-                        ${prod.disponible ? 'Consultar Vía WhatsApp' : 'Consultar Próxima Tanda'}
-                    </a>
-                </div>
-            </div>
-        `;
-        
-        catalogGrid.appendChild(card);
-    });
-}
-
-        // --- 3. ESCUCHADOR DE FILTROS ---
-        filterButtons.forEach(button => {
-            button.addEventListener("click", function() {
-                filterButtons.forEach(btn => btn.classList.remove("active"));
-                this.classList.add("active");
-
-                const selectedFilter = this.getAttribute("data-filter");
-                renderProducts(selectedFilter);
-            });
-        });
-
-        // Ejecutamos el render inicial con todos los productos
-        renderProducts("all");
-    });
-</script>
 </body>
 
 </html>

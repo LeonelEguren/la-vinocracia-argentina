@@ -7,42 +7,7 @@
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-
-<nav class="navbar">
-        <div class="nav-identity">
-            <div class="logo-container">
-                <img src="img/Main/logo01.png" alt="Damajuana" class="logo-img">
-            </div>
-
-            <div class="svg-container">
-                <svg viewBox="0 0 400 110" width="100%" height="100%">
-                    <defs>
-                        <path id="mixCurveLa" d="M 20,45 L 90,22" fill="transparent" />
-                        <path id="mixCurveVinocracia" d="M 15,95 L 290,45" fill="transparent" />
-                        <filter id="mixTextShadow" x="-10%" y="-10%" width="120%" height="120%">
-                            <feDropShadow dx="1" dy="1.5" stdDeviation="0.8" flood-color="#000000" flood-opacity="0.2" />
-                        </filter>
-                    </defs>
-                    <text font-family="'Caveat', cursive" font-size="38" font-weight="900" fill="#1a1a1a" filter="url(#mixTextShadow)">
-                        <textPath href="#mixCurveLa" startOffset="0%">La</textPath>
-                    </text>
-                    <text font-family="'Caveat', cursive" font-size="44" font-weight="900" fill="#1a1a1a" filter="url(#mixTextShadow)" letter-spacing="0.5px">
-                        <textPath href="#mixCurveVinocracia" startOffset="0%">Vinocracia</textPath>
-                    </text>
-                </svg>
-            </div>
-        </div>
-
-        <div class="nav-menu">
-            <a href="#eventos">Eventos</a>
-            <a href="#catalogo">Catálogo</a>
-            <a href="index.html">Inicio</a>
-        </div>
-    </nav>
-    
-   
-</nav>
-    </div>
+        <div id="navbar-container"></div>
 </header>
 
 <main class="main-board">
@@ -136,6 +101,13 @@ En definitiva, las reseñas y críticas del mundo entero coinciden en que Finca 
     document.addEventListener("DOMContentLoaded", function() {
         cargarNota('infocracia/nota1.txt', document.querySelector('.infocracia-polaroid'));
     });
+
+    // Carga el navbar en el contenedor
+    fetch('navbar.html')
+        .then(res => res.text())
+        .then(text => {
+            document.getElementById('navbar-container').innerHTML = text;
+        });
 </script>
 </body>
 </html>
