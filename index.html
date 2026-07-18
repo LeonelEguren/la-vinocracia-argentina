@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="kioskito.css">
 </head>
 <body>
 
@@ -122,92 +123,16 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- SECCIÓN: ALMACÉN (PRODUCTOS)               -->
+    <!-- SECCIÓN: Kioskito (PRODUCTOS)               -->
     <!-- ========================================== -->
    
-<section id="kioskito" class="catalog-section">
-     <div class="catalog-title">
-        <h2 >Kioskito</h2>
-        </div>
-        <div class="filter-container">
-            <button class="filter-btn active" data-filter="all">Todos</button>
-            <button class="filter-btn" data-filter="tintos">Tintos</button>
-            <button class="filter-btn" data-filter="naranjos-blancos">Naranjos / Blancos</button>
-            <button class="filter-btn" data-filter="pet-nat">Pet Nat</button>
-            <button class="filter-btn" data-filter="copa">Copas</button>
-        </div>
+    <!-- El contenedor del Kioskito se cargará aquí -->
+    <div id="kioskito-container"></div>
 
-        <div class="catalog-grid" id="catalogGrid"></div>
-    </section>
-
-    <script src="productos.js"></script>
+    <script src="vinos.js"></script>
+    <script src="kioskito.js"></script>
     <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // --- 2. RENDERIZADO FILTRADO POR CATEGORÍA ESPECÍFICA ---
-        const catalogGrid = document.getElementById("catalogGrid");
-        const filterButtons = document.querySelectorAll(".filter-btn");
-
-        function renderProducts(filterValue = "all") {
-            if (!catalogGrid) return;
-            
-            catalogGrid.innerHTML = ""; 
-
-            // Filtramos comparando contra la propiedad 'categoria' de cada producto
-            const filtrados = filterValue === "all" 
-                ? productos 
-                : productos.filter(prod => prod.categoria === filterValue);
-
-            if (filtrados.length === 0) {
-                catalogGrid.innerHTML = `<p class="no-products" style="grid-column: 1/-1; font-family: var(--font-body); text-align: center; color: white; padding: 20px;">Próximamente más ingresos en esta categoría.</p>`;
-                return;
-            }
-
-            filtrados.forEach(prod => {
-                const card = document.createElement("div");
-                card.className = "wine-card";
-                card.setAttribute("data-category", prod.categoria);
-                
-                const mensajeWa = encodeURIComponent(`¡Hola! Me interesa consultar por el producto: ${prod.nombre}`);
-                const urlWhatsapp = `https://wa.me/5491130604617?text=${mensajeWa}`;
-
-                card.innerHTML = `
-                    <div class="wine-img-container" style="position: relative;">
-                        <img src="${prod.imagen}" alt="${prod.nombre}" class="wine-img">
-                        ${!prod.disponible ? '<span class="badge badge-error" style="position: absolute; top: 10px; right: 10px; background: #852229; color: white; padding: 5px 10px; font-family: var(--font-body); font-size: 12px; border-radius: 4px; font-weight: bold;">Sin Stock</span>' : ''}
-                    </div>
-                    <div class="wine-details" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
-                        <div>
-                            <h3 class="wine-title">${prod.nombre}</h3>
-                            <p class="wine-description">${prod.descripcion}</p>
-                        </div>
-                        <div style="margin-top: 15px;">
-                            <a href="${urlWhatsapp}" target="_blank" class="whatsapp-btn" style="text-decoration: none; text-align: center; display: block;">
-                                ${prod.disponible ? 'Consultar Vía WhatsApp' : 'Consultar Próxima Tanda'}
-                            </a>
-                        </div>
-                    </div>
-                `;
-                
-                catalogGrid.appendChild(card);
-            });
-        }
-
-        // --- 3. EVENTOS DE FILTRADO ---
-        filterButtons.forEach(button => {
-            button.addEventListener("click", function() {
-                filterButtons.forEach(btn => btn.classList.remove("active"));
-                this.classList.add("active");
-
-                const selectedFilter = this.getAttribute("data-filter");
-                renderProducts(selectedFilter);
-            });
-        });
-
-        // Ejecución inicial
-        renderProducts("all");
-
-        // --- CARGA DE COMPONENTES MODULARES ---
-
+    function initSharedComponents() {
         // Carga el navbar en el contenedor
         fetch('navbar.html')
             .then(res => res.text())
@@ -215,17 +140,26 @@
                 document.getElementById('navbar-container').innerHTML = text;
             });
 
-        // Carga el modal en su contenedor y luego el script que lo controla
+        // Carga el modal en su contenedor y luego inicializa su lógica
         fetch('modal.html')
             .then(res => res.text())
             .then(text => {
                 document.getElementById('modal-container').innerHTML = text;
-                const modalScript = document.createElement('script');
-                modalScript.src = 'modal.js';
-                document.body.appendChild(modalScript);
+                if (window.initModal) {
+                    window.initModal();
+                } else {
+                    const modalScript = document.createElement('script');
+                    modalScript.src = 'modal.js';
+                    modalScript.onload = () => {
+                        if (window.initModal) window.initModal();
+                    };
+                    document.body.appendChild(modalScript);
+                }
             });
-    });
-    </script>
+    }
+
+    document.addEventListener("DOMContentLoaded", initSharedComponents);
+</script>
 
  <section id="deOrigen" class="events-section">
         <div class="events-container">
@@ -345,6 +279,8 @@
             </div>
         </div>
     </footer>
+
+
 </body>
 
 </html>
