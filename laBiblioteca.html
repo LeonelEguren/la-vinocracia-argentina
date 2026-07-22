@@ -3,111 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infocracia - Cultura del Vino</title>
+    <title>La Biblioteca | La Vinocracia</title>
     <link rel="stylesheet" href="estilos.css">
-</head>
+    <!-- Estilos Propios de la sección -->
+    <link rel="stylesheet" href="biblioteca.css">
 <body>
-        <div id="navbar-container"></div>
-</header>
 
-<main class="main-board">
-    <section class="infocracia-container">
+    <!-- Contenedor para el Navbar (se carga dinámicamente) -->
+    <div id="navbar-container"></div>
+
+    <main class="biblioteca-wrapper">
         
-        <!-- COLUMNA IZQUIERDA: MENÚ DE POLAROIDS SELECCIONABLES -->
-        <div class="infocracia-menu">
-            <div class="infocracia-header-label">Infocracia</div>
+        <!-- ENCABEZADO: Título, Subtítulo y Buscador Dinámico -->
+        <header class="biblioteca-header">
+            <h1>La Biblioteca</h1>
+            <p class="subtitle">Artículos, crónicas y reflexiones alrededor de la copa.</p>
             
-            <!-- Polaroid 1: Finca Suárez -->
-            <div class="infocracia-polaroid active" onclick="cargarNota('infocracia/nota1.txt', this)">
-                <div class="infocracia-img-container">
-                    <img src="infocracia/fotoNota01.png" alt="Finca Suárez" class="infocracia-photo">
-                </div>
-                <div class="infocracia-caption">Finca Suárez</div>
+            <div class="search-box">
+                <input type="text" id="inputBuscador" placeholder="Buscar notas por título, tema o palabras clave...">
             </div>
+        </header>
 
-            <!-- Polaroid 2: Bares -->
-            <div class="infocracia-polaroid" onclick="cargarNota('infocracia/nota2.txt', this)">
-                <div class="infocracia-img-container">
-                    <img src="img/Main/logo01.png" alt="Bares de Vino" class="infocracia-photo" onerror="this.src='img/Main/logo01.png'; this.style.objectFit='contain';">
+        <!-- VISTA 1: Grilla de Polaroids (Se renderiza desde notas.js / biblioteca.js) -->
+        <section id="gridNotas" class="polaroid-grid">
+            <!-- Se llena dinámicamente -->
+        </section>
+
+        <!-- VISTA 2: Lector de Nota (Oculto por defecto, abre al hacer click en una Polaroid) -->
+        <article id="lectorNota" class="nota-detalle-container" style="display: none;">
+            <button id="btnVolver" class="btn-back">← Volver a La Biblioteca</button>
+
+            <div class="nota-layout">
+                <!-- Sidebar con la Polaroid de la nota -->
+                <aside class="nota-sidebar">
+                    <div class="biblioteca-card biblioteca-card-detalle">
+                        <div class="biblioteca-card-image">
+                            <img id="notaImg" src="" alt="">
+                        </div>
+                        <div class="biblioteca-card-caption">
+                            <span id="notaFecha" class="biblioteca-card-fecha"></span>
+                            <span id="notaAutor" class="biblioteca-card-autor"></span>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Hoja de lectura con el texto completo de la nota -->
+                <div class="nota-cuerpo-wrapper">
+                    <span id="notaCategoria" class="badge-categoria"></span>
+                    <h2 id="notaTitulo" class="nota-titulo"></h2>
+                    <p id="notaBajada" class="nota-bajada"></p>
+                    <hr class="nota-divider">
+                    <div id="notaContenido" class="nota-texto"></div>
                 </div>
-                <div class="infocracia-caption">Bares</div>
             </div>
+        </article>
 
-            <!-- Polaroid 3: Dónde comer -->
-            <div class="infocracia-polaroid" onclick="cargarNota('infocracia/nota3.txt', this)">
-                <div class="infocracia-img-container">
-                    <img src="img/Main/logo01.png" alt="Dónde Comer" class="infocracia-photo" onerror="this.src='img/Main/logo01.png'; this.style.objectFit='contain';">
-                </div>
-                <div class="infocracia-caption">Dónde comer</div>
-            </div>
-        </div>
+    </main>
 
-        <!-- COLUMNA DERECHA: LA HOJA RAYADA QUE MUESTRA LA NOTA SELECCIONADA -->
-        <div class="infocracia-content">
-            <div class="infocracia-notebook-paper">
-                <div id="infocracia-text-content">
-                    <p>Seleccioná una nota del tablero para leer...</p>
-                </div>
-            </div>
-        </div>
+    <!-- Scripts de la lógica del catálogo y buscador -->
+    <script src="laBiblioteca/notas.js"></script>
+    <script src="biblioteca.js"></script>
 
-    </section>
-</main>
-
-<script>
-    const notasTexto = {
-        'infocracia/nota1.txt': `Finca Suárez es uno de los secretos mejor guardados y más respetados de Altamira, en el corazón del Valle de Uco, Mendoza. Conducido por Juanfa Suárez, este proyecto familiar destaca por recuperar la tradición vitivinícola de sus antepasados bajo una mirada de mínima intervención y un profundo respeto por el entorno. El viñedo, plantado sobre suelos calcáreos, pedregosos y arenosos característicos de la zona, se beneficia de la altitud y de la gran amplitud térmica para dar vida a uvas de una sanidad y concentración excepcionales.
-
-La filosofía de elaboración de la bodega se aleja deliberadamente de las maderas pesadas y la sobremaduración para enfocarse en la pureza de la fruta y la expresión del terroir. Sus vinos —donde sobresalen un Malbec icónico, un Cabernet Franc vibrante y un Chardonnay de notable tipicidad— se caracterizan por una marcada frescura, elegancia y una acidez natural que les otorga una tensión envidiable en boca. El uso sutil de barricas usadas y piletas de hormigón permite que la mineralidad calcárea de Altamira sea la verdadera protagonista en cada botella.
-
-En definitiva, las reseñas y críticas del mundo entero coinciden en que Finca Suárez elabora vinos con una identidad y un sentido de lugar asombrosos. Son etiquetas ideales para los amantes de la cultura del vino que buscan autenticidad, fluidez y un reflejo fiel del suelo pedregoso mendocino. Una parada obligatoria en el radar si querés entender hacia dónde van los proyectos modernos que rinden culto al paisaje sin perder la elegancia clásica.`,
-        'infocracia/nota2.txt': 'Próximamente más contenido para esta nota.',
-        'infocracia/nota3.txt': 'Próximamente más contenido para esta nota.'
-    };
-
-    function renderizarTexto(texto) {
-        const parrafos = texto.split('\n').filter(parrafo => parrafo.trim() !== '').map(p => `<p>${p}</p>`).join('');
-        document.getElementById('infocracia-text-content').innerHTML = parrafos;
-    }
-
-    function cargarNota(rutaArchivo, elementoPolaroid) {
-        // 1. Cambiar la clase activa visualmente en las Polaroids
-        document.querySelectorAll('.infocracia-polaroid').forEach(p => p.classList.remove('active'));
-        if(elementoPolaroid) {
-            elementoPolaroid.classList.add('active');
-        }
-
-        // 2. Intentar primero con el contenido embebido para que funcione al abrir el archivo localmente
-        if (notasTexto[rutaArchivo]) {
-            renderizarTexto(notasTexto[rutaArchivo]);
-            return;
-        }
-
-        fetch(rutaArchivo)
-            .then(response => {
-                if (!response.ok) throw new Error("No se pudo cargar la nota seleccionada.");
-                return response.text();
+    <!-- Carga del Navbar dinámico -->
+    <script>
+        fetch('navbar.html')
+            .then(res => res.text())
+            .then(text => {
+                document.getElementById('navbar-container').innerHTML = text;
             })
-            .then(data => {
-                renderizarTexto(data);
-            })
-            .catch(error => {
-                console.error(error);
-                document.getElementById('infocracia-text-content').innerHTML = "<p>Contenido no disponible momentáneamente.</p>";
-            });
-    }
-
-    // Al cargar la página por primera vez, abrimos automáticamente Finca Suárez
-    document.addEventListener("DOMContentLoaded", function() {
-        cargarNota('infocracia/nota1.txt', document.querySelector('.infocracia-polaroid'));
-    });
-
-    // Carga el navbar en el contenedor
-    fetch('navbar.html')
-        .then(res => res.text())
-        .then(text => {
-            document.getElementById('navbar-container').innerHTML = text;
-        });
-</script>
+            .catch(err => console.error("Error al cargar el navbar:", err));
+    </script>
 </body>
 </html>
