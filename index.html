@@ -138,6 +138,67 @@
             .then(res => res.text())
             .then(text => {
                 document.getElementById('navbar-container').innerHTML = text;
+
+                const toggle = document.getElementById('navSearchToggle');
+                const container = document.querySelector('.nav-search-container');
+                const input = document.getElementById('navBuscador');
+                const actionButton = document.getElementById('navSearchAction');
+
+                if (toggle && container && input && actionButton) {
+                    function setSearchUIState(isOpen) {
+                        container.classList.toggle('open', isOpen);
+                        toggle.classList.toggle('active', isOpen);
+
+                        if (isOpen) {
+                            input.style.width = '160px';
+                            input.style.opacity = '1';
+                            input.style.paddingLeft = '0.8rem';
+                            input.style.paddingRight = '0.8rem';
+                            input.style.marginLeft = '0.5rem';
+                            input.style.pointerEvents = 'auto';
+                            actionButton.style.width = 'auto';
+                            actionButton.style.opacity = '1';
+                            actionButton.style.paddingLeft = '0.8rem';
+                            actionButton.style.paddingRight = '0.8rem';
+                            actionButton.style.marginLeft = '0.4rem';
+                            actionButton.style.pointerEvents = 'auto';
+                            input.focus();
+                        } else {
+                            input.value = '';
+                            input.style.width = '0';
+                            input.style.opacity = '0';
+                            input.style.paddingLeft = '0';
+                            input.style.paddingRight = '0';
+                            input.style.marginLeft = '0';
+                            input.style.pointerEvents = 'none';
+                            actionButton.style.width = '0';
+                            actionButton.style.opacity = '0';
+                            actionButton.style.paddingLeft = '0';
+                            actionButton.style.paddingRight = '0';
+                            actionButton.style.marginLeft = '0';
+                            actionButton.style.pointerEvents = 'none';
+                            input.blur();
+                        }
+                    }
+
+                    toggle.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        setSearchUIState(!container.classList.contains('open'));
+                    });
+
+                    actionButton.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        if (window.buscarVinosNavbar) {
+                            window.buscarVinosNavbar(input.value.trim());
+                        } else {
+                            document.dispatchEvent(new CustomEvent('navbarSearchRequested', {
+                                detail: { value: input.value.trim() }
+                            }));
+                        }
+                        setSearchUIState(false);
+                    });
+                }
             });
 
         // Carga el modal en su contenedor y luego inicializa su lógica

@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const gridNotas = document.getElementById("gridNotas");
   const lectorNota = document.getElementById("lectorNota");
-  const inputBuscador = document.getElementById("inputBuscador");
   const btnVolver = document.getElementById("btnVolver");
 
   // Renderizar la grilla de Polaroids
@@ -9,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gridNotas.innerHTML = "";
 
     if (lista.length === 0) {
-      gridNotas.innerHTML = `<p class="no-results">No se encontraron notas con esa búsqueda.</p>`;
+      gridNotas.innerHTML = `<p class="no-results" style="grid-column: 1/-1; text-align: center; font-size: 1.2rem; color: #666; padding: 2rem;">No se encontraron notas con esa búsqueda.</p>`;
       return;
     }
 
@@ -56,29 +55,45 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Volver a la grilla
-  btnVolver.addEventListener("click", () => {
-    lectorNota.style.display = "none";
-    gridNotas.style.display = "grid";
-  });
-
-  // Buscador en tiempo real
-  inputBuscador.addEventListener("input", (e) => {
-    const termino = e.target.value.toLowerCase().trim();
-    const filtradas = notasBiblioteca.filter(nota => 
-      nota.titulo.toLowerCase().includes(termino) ||
-      nota.bajada.toLowerCase().includes(termino) ||
-      nota.categoria.toLowerCase().includes(termino)
-    );
-    
-    // Si estaba leyendo una nota y busca, volvemos a la grilla
-    if (lectorNota.style.display === "block") {
+  if (btnVolver) {
+    btnVolver.addEventListener("click", () => {
       lectorNota.style.display = "none";
       gridNotas.style.display = "grid";
+    });
+  }
+
+  // Inicialización de la grilla si la variable existe
+  if (typeof notasBiblioteca !== 'undefined') {
+    renderizarGrilla(notasBiblioteca);
+  }
+
+  // Escuchar al buscador del Navbar (cargado dinámicamente)
+  // Usamos delegación o un pequeño intervalo para asegurar que el DOM del navbar esté insertado
+  const conectarBuscadorNav = setInterval(() => {
+    const navBuscador = document.getElementById("navBuscador");
+    if (navBuscador) {
+      clearInterval(conectarBuscadorNav);
+      navBuscador.placeholder = "Buscar notas o artículos...";
+
+      navBuscador.addEventListener("input", (e) => {
+        const termino = e.target.value.toLowerCase().trim();
+        
+        if (typeof notasBiblioteca === 'undefined') return;
+
+        const filtradas = notasBiblioteca.filter(nota => 
+          nota.titulo.toLowerCase().includes(termino) ||
+          nota.bajada.toLowerCase().includes(termino) ||
+          nota.categoria.toLowerCase().includes(termino)
+        );
+        
+        // Si estaba leyendo una nota y empieza a buscar, regresa a la grilla
+        if (lectorNota && lectorNota.style.display === "block") {
+          lectorNota.style.display = "none";
+          gridNotas.style.display = "grid";
+        }
+
+        renderizarGrilla(filtradas);
+      });
     }
-
-    renderizarGrilla(filtradas);
-  });
-
-  // Inicialización
-  renderizarGrilla(notasBiblioteca);
+  }, 100);
 });

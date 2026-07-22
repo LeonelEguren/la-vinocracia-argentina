@@ -306,18 +306,16 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
 /* ==========================================================================
    ESTRUCTURAS ACCESORIAS: NAVBAR, FOOTER Y MODAL
    ========================================================================== */
-.navbar { display: flex; align-items: center; justify-content: space-between; padding: 15px 40px; background-color: rgba(245, 242, 235, 0.95); border-bottom: 2px solid rgba(30, 26, 23, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: relative; z-index: 100; }
-.nav-identity { display: flex; align-items: center; gap: 10px; }
-.logo-container { width: 70px; height: 70px; border-radius: 50%; border: 1px solid rgba(30, 26, 23, 0.15); display: flex; align-items: center; justify-content: center; background-color: #FAF8F5; overflow: hidden; flex-shrink: 0; }
-.logo-img { width: 75%; height: 75%; object-fit: contain; display: block; }
-.svg-container { width: 400px; height: 110px; overflow: visible; margin-left: 5px; margin-top: -10px; }
+.navbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 12px 24px; background-color: rgba(245, 242, 235, 0.95); border-bottom: 2px solid rgba(30, 26, 23, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: relative; z-index: 100; }
+.nav-identity { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; min-width: 0; }
+.logo-container { width: 54px; height: 54px; border-radius: 50%; border: 1px solid rgba(30, 26, 23, 0.15); display: flex; align-items: center; justify-content: center; background-color: #FAF8F5; overflow: hidden; flex-shrink: 0; }
+.logo-img { width: 78%; height: 78%; object-fit: contain; display: block; }
+.svg-container { width: 220px; height: 60px; overflow: hidden; margin-left: 2px; margin-top: 0; flex-shrink: 0; }
+.svg-container svg { width: 100%; height: 100%; }
 .svg-container svg text, .svg-container svg path { fill: #1E1A17 !important; }
-.nav-brand-link {
-    text-decoration: none; /* Quita el subrayado del enlace */
-    color: inherit; /* Hereda el color del texto para que no se ponga azul */
-}
-.nav-menu { display: flex; gap: 35px; align-items: center; }
-.nav-menu a { color: #1E1A17; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; font-size: 0.9rem; text-decoration: none; transition: color 0.3s ease; }
+.nav-brand-link { text-decoration: none; color: inherit; display: flex; align-items: center; }
+.nav-menu { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+.nav-menu a { color: #1E1A17; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; font-size: 0.8rem; text-decoration: none; transition: color 0.3s ease; white-space: nowrap; }
 .nav-menu a:hover { color: var(--color-wine); }
 
 .main-footer { background-color: #1E1A17; color: #FAF8F5; padding: 60px 20px 30px 20px; position: relative; z-index: 90; }
@@ -439,9 +437,16 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
    VISTA RESPONSIVE MOBILE OPTIMIZATION
  ========================================================================== */
 @media (max-width: 768px) {
-    .navbar { flex-direction: column; gap: 15px; padding: 15px; }
-    .svg-container { width: 260px; height: 75px; margin-top: 0; }
-    .nav-menu { gap: 21px; }
+    .navbar { flex-direction: column; gap: 12px; padding: 12px 14px; }
+    .nav-brand-link { width: 100%; justify-content: center; }
+    .nav-identity { justify-content: center; }
+    .logo-container { width: 46px; height: 46px; }
+    .svg-container { width: 200px; height: 56px; margin-top: 0; }
+    .nav-menu { width: 100%; justify-content: center; gap: 10px 14px; flex-wrap: wrap; }
+    .nav-menu a { font-size: 0.72rem; }
+    .nav-search-container { margin-left: 0; width: 100%; justify-content: center; }
+    .nav-search-container input { width: 100%; max-width: 220px; }
+    .nav-search-container input:focus { width: 100%; max-width: 220px; }
     
     .catalog-title, .trinchera-title, .section-title-white, .main-header {
         max-width: 92%;
@@ -1099,4 +1104,101 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
     /* ... tus estilos actuales ... */
     filter: url(#papel-arrugado) drop-shadow(4px 4px 10px rgba(0,0,0,0.25));
     /* Nota: Remové cualquier rotación en hover para que no parpadee el filtro */
+}
+
+/* navbar buscador */
+.nav-search-container {
+  display: flex;
+  align-items: center;
+  margin-left: 0.25rem;
+  position: relative;
+}
+
+.nav-search-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(30, 26, 23, 0.15);
+  border-radius: 50%;
+  background-color: #f4efe8;
+  color: #6b1f22;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.nav-search-toggle:hover,
+.nav-search-toggle.active {
+  background-color: #6b1f22;
+  color: #fff;
+}
+
+.nav-search-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.nav-search-input {
+  padding: 0.45rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  outline: none;
+  background-color: #fcfcfc;
+  transition: all 0.25s ease;
+  width: 0;
+  opacity: 0;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  pointer-events: none;
+}
+
+.nav-search-action {
+  border: 1px solid #6b1f22;
+  border-radius: 20px;
+  background-color: #6b1f22;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  width: 0;
+  opacity: 0;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.nav-search-container.open .nav-search-input {
+  width: 160px;
+  opacity: 1;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  margin-left: 0.5rem;
+  pointer-events: auto;
+}
+
+.nav-search-container.open .nav-search-action {
+  width: auto;
+  opacity: 1;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  margin-left: 0.4rem;
+  pointer-events: auto;
+}
+
+.nav-search-input:focus {
+  border-color: #8b0000;
+  box-shadow: 0 0 5px rgba(139, 0, 0, 0.2);
+}
+
+.nav-search-action:hover {
+  background-color: #8b0000;
+  border-color: #8b0000;
 }

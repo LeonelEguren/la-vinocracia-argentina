@@ -19,9 +19,7 @@
             <h1>La Biblioteca</h1>
             <p class="subtitle">Artículos, crónicas y reflexiones alrededor de la copa.</p>
             
-            <div class="search-box">
-                <input type="text" id="inputBuscador" placeholder="Buscar notas por título, tema o palabras clave...">
-            </div>
+        
         </header>
 
         <!-- VISTA 1: Grilla de Polaroids (Se renderiza desde notas.js / biblioteca.js) -->
@@ -70,6 +68,37 @@
             .then(res => res.text())
             .then(text => {
                 document.getElementById('navbar-container').innerHTML = text;
+
+                const toggle = document.getElementById('navSearchToggle');
+                const container = document.querySelector('.nav-search-container');
+                const input = document.getElementById('navBuscador');
+
+                if (toggle && container && input) {
+                    toggle.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        const isOpen = container.classList.toggle('open');
+                        toggle.classList.toggle('active', isOpen);
+
+                        if (isOpen) {
+                            input.style.width = '160px';
+                            input.style.opacity = '1';
+                            input.style.paddingLeft = '0.8rem';
+                            input.style.paddingRight = '0.8rem';
+                            input.style.marginLeft = '0.5rem';
+                            input.style.pointerEvents = 'auto';
+                            input.focus();
+                        } else {
+                            input.style.width = '0';
+                            input.style.opacity = '0';
+                            input.style.paddingLeft = '0';
+                            input.style.paddingRight = '0';
+                            input.style.marginLeft = '0';
+                            input.style.pointerEvents = 'none';
+                            input.blur();
+                        }
+                    });
+
+                }
             })
             .catch(err => console.error("Error al cargar el navbar:", err));
     </script>

@@ -1,34 +1,113 @@
 <nav class="navbar">
     <a href="index.html" class="nav-brand-link">
         <div class="nav-identity">
-                <div class="logo-container">
-                    <img src="img/Main/logo01.png" alt="Damajuana" class="logo-img">
-                </div>
-    
-                <div class="svg-container">
-                    <svg viewBox="0 0 400 110" width="100%" height="100%">
-                        <defs>
-                            <path id="mixCurveLa" d="M 20,45 L 90,22" fill="transparent" />
-                            <path id="mixCurveVinocracia" d="M 15,95 L 290,45" fill="transparent" />
-                            <filter id="mixTextShadow" x="-10%" y="-10%" width="120%" height="120%">
-                                <feDropShadow dx="1" dy="1.5" stdDeviation="0.8" flood-color="#000000" flood-opacity="0.2" />
-                            </filter>
-                        </defs>
-                        <text font-family="'Caveat', cursive" font-size="38" font-weight="900" fill="#1a1a1a" filter="url(#mixTextShadow)">
-                            <textPath href="#mixCurveLa" startOffset="0%">La</textPath>
-                        </text>
-                        <text font-family="'Caveat', cursive" font-size="44" font-weight="900" fill="#1a1a1a" filter="url(#mixTextShadow)" letter-spacing="0.5px">
-                            <textPath href="#mixCurveVinocracia" startOffset="0%">Vinocracia</textPath>
-                        </text>
-                    </svg>
-                </div>
+            <div class="logo-container">
+                <img src="img/Main/logo01.png" alt="Damajuana" class="logo-img">
             </div>
+
+            <div class="svg-container">
+                <svg viewBox="0 0 400 110" width="100%" height="100%">
+                    <defs>
+                        <path id="mixCurveLa" d="M 20,45 L 90,22" fill="transparent" />
+                        <path id="mixCurveVinocracia" d="M 15,95 L 290,45" fill="transparent" />
+                        <filter id="mixTextShadow" x="-10%" y="-10%" width="120%" height="120%">
+                            <feDropShadow dx="1" dy="1.5" stdDeviation="0.8" flood-color="#000000" flood-opacity="0.2" />
+                        </filter>
+                    </defs>
+                    <text font-family="'Caveat', cursive" font-size="38" font-weight="900" fill="#1a1a1a" filter="url(#mixTextShadow)">
+                        <textPath href="#mixCurveLa" startOffset="0%">La</textPath>
+                    </text>
+                    <text font-family="'Caveat', cursive" font-size="44" font-weight="900" fill="#1a1a1a" filter="url(#mixTextShadow)" letter-spacing="0.5px">
+                        <textPath href="#mixCurveVinocracia" startOffset="0%">Vinocracia</textPath>
+                    </text>
+                </svg>
+            </div>
+        </div>
     </a>
+
     <div class="nav-menu">
         <a href="index.html#mendoza">Mendoza</a>
         <a href="index.html#encuentros">Encuentros</a>
         <a href="index.html#kioskito">Kioskito</a>
         <a href="index.html#deOrigen">De Origen</a>
         <a href="laBiblioteca.html">La Biblioteca</a>
+        
+        <!-- BUSCADOR CONTEXTUAL -->
+        <div class="nav-search-container">
+            <button type="button" class="nav-search-toggle" id="navSearchToggle" aria-label="Abrir buscador" title="Buscar">
+                <span class="nav-search-icon">🔍</span>
+            </button>
+            <input type="text" id="navBuscador" placeholder="Buscar vinos" autocomplete="off" class="nav-search-input">
+            <button type="button" class="nav-search-action" id="navSearchAction" aria-label="Buscar vinos">Buscar</button>
+        </div>
     </div>
 </nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('navSearchToggle');
+    const container = document.querySelector('.nav-search-container');
+    const input = document.getElementById('navBuscador');
+    const actionButton = document.getElementById('navSearchAction');
+
+    if (!toggle || !container || !input || !actionButton) return;
+
+    function setSearchUIState(isOpen) {
+      container.classList.toggle('open', isOpen);
+      toggle.classList.toggle('active', isOpen);
+
+      if (isOpen) {
+        input.style.width = '160px';
+        input.style.opacity = '1';
+        input.style.paddingLeft = '0.8rem';
+        input.style.paddingRight = '0.8rem';
+        input.style.marginLeft = '0.5rem';
+        input.style.pointerEvents = 'auto';
+        actionButton.style.width = 'auto';
+        actionButton.style.opacity = '1';
+        actionButton.style.paddingLeft = '0.8rem';
+        actionButton.style.paddingRight = '0.8rem';
+        actionButton.style.marginLeft = '0.4rem';
+        actionButton.style.pointerEvents = 'auto';
+        input.focus();
+      } else {
+        input.value = '';
+        input.style.width = '0';
+        input.style.opacity = '0';
+        input.style.paddingLeft = '0';
+        input.style.paddingRight = '0';
+        input.style.marginLeft = '0';
+        input.style.pointerEvents = 'none';
+        actionButton.style.width = '0';
+        actionButton.style.opacity = '0';
+        actionButton.style.paddingLeft = '0';
+        actionButton.style.paddingRight = '0';
+        actionButton.style.marginLeft = '0';
+        actionButton.style.pointerEvents = 'none';
+        input.blur();
+      }
+    }
+
+    toggle.addEventListener('click', (event) => {
+      event.stopPropagation();
+      setSearchUIState(!container.classList.contains('open'));
+    });
+
+    actionButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      if (window.buscarVinosNavbar) {
+        window.buscarVinosNavbar(input.value.trim());
+      } else {
+        document.dispatchEvent(new CustomEvent('navbarSearchRequested', {
+          detail: { value: input.value.trim() }
+        }));
+      }
+      setSearchUIState(false);
+    });
+
+    document.addEventListener('click', () => {
+      setSearchUIState(false);
+    });
+  });
+</script>
