@@ -4,8 +4,6 @@
 
     if (!container) return;
 
-    const productos = Array.isArray(window.listaVinos) ? window.listaVinos : [];
-
     async function initKioskito() {
         try {
             const response = await fetch('kioskito/kioskito.html');
@@ -24,7 +22,6 @@
             const catalogGrid = document.getElementById('catalogGrid');
             const filterButtons = container.querySelectorAll('.filter-btn');
 
-            if (!catalogGrid) return;
 
             let activeFilter = 'all';
             let navbarSearchAttached = false;
@@ -37,11 +34,11 @@
                     .replace(/[\u0300-\u036f]/g, '');
             }
 
-            function renderProductsList(lista, mensaje = 'no encontramos el vino que buscas') {
-                catalogGrid.innerHTML = '';
+            function renderProductsList(lista, mensaje = 'no encontramos el vino que buscas', targetGrid = catalogGrid) {
+                targetGrid.innerHTML = '';
 
                 if (lista.length === 0) {
-                    catalogGrid.innerHTML = `
+                    targetGrid.innerHTML = `
                         <p class="no-products" style="grid-column: 1/-1; font-family: var(--font-body); text-align: center; color: white; padding: 20px;">
                             ${mensaje}
                         </p>
@@ -53,8 +50,11 @@
                     const card = document.createElement('div');
                     card.className = 'wine-card';
                     card.setAttribute('data-category', prod.categoria || '');
+                    card.dataset.productId = prod.id || '';
                     card.style.borderRadius = '0';
                     card.style.overflow = 'hidden';
+                    card.style.cursor = 'pointer';
+                    card.title = 'Ver detalle del producto';
 
                     const disponible = prod.disponible !== false;
                     const mensajeWa = encodeURIComponent(`¡Hola! Me interesa consultar por el producto: ${prod.nombre}`);
@@ -79,7 +79,19 @@
                             </a>
                         </div>
                     `;
-                    catalogGrid.appendChild(card);
+
+                    card.addEventListener('click', () => {
+                        openProductDetail(prod.id);
+                    });
+
+                    targetGrid.appendChild(card);
+
+                    const whatsappButton = card.querySelector('.wine-btn-consultar');
+                    if (whatsappButton) {
+                        whatsappButton.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                        });
+                    }
                 });
             }
 
@@ -107,6 +119,9 @@
             }
 
             function matchesSearch(prod, termino) {
+                const searchTerm = normalizeValue(termino);
+                if (!searchTerm) return false;
+
                 const campos = [
                     prod.nombre,
                     prod.bodega,
@@ -117,7 +132,10 @@
                     prod.filter
                 ];
 
-                return campos.some((campo) => normalizeValue(campo).includes(termino));
+                return campos.some((campo) => {
+                    if (!campo) return false;
+                    return normalizeValue(campo).includes(searchTerm);
+                });
             }
 
             function inferFilterFromTerm(termino) {
@@ -186,6 +204,98 @@
 
             window.buscarVinosNavbar = ejecutarBusquedaNavbar;
 
+            function getSearchOverlayElements() {
+                return {
+                    searchOverlay: document.getElementById('search-overlay'),
+                    searchOverlayInput: document.getElementById('search-overlay-input'),
+                    searchOverlayResults: document.getElementById('search-overlay-results'),
+                    searchOverlayClose: document.getElementById('search-overlay-close')
+                };
+            }
+
+            function updateSearchResults(termino) {
+                const { searchOverlayResults } = getSearchOverlayElements();
+                if (!searchOverlayResults) return;
+                const terminoNormalizado = normalizeValue(termino);
+                if (!terminoNormalizado) {
+                    searchOverlayResults.innerHTML = '';
+                    return;
+                }
+                const resultados = productos.filter((prod) => matchesSearch(prod, terminoNormalizado));
+                renderProductsList(resultados, 'No encontramos vinos para tu búsqueda', searchOverlayResults);
+            }
+
+            function openSearchOverlay(termino = '') {
+                const { searchOverlay, searchOverlayInput, searchOverlayResults } = getSearchOverlayElements();
+                if (!searchOverlay || !searchOverlayInput || !searchOverlayResults) return;
+                searchOverlay.classList.add('visible');
+                document.body.style.overflow = 'hidden';
+                searchOverlayInput.value = termino;
+                if (termino.trim()) {
+                    updateSearchResults(termino);
+                } else {
+                    searchOverlayResults.innerHTML = '';
+                }
+                searchOverlayInput.focus();
+            }
+
+            function closeSearchOverlay() {
+                const { searchOverlay, searchOverlayInput, searchOverlayResults } = getSearchOverlayElements();
+                if (!searchOverlay || !searchOverlayInput || !searchOverlayResults) return;
+                searchOverlay.classList.remove('visible');
+                document.body.style.overflow = '';
+                searchOverlayInput.value = '';
+                searchOverlayResults.innerHTML = '';
+            }
+
+            window.openKioskitoSearchOverlay = openSearchOverlay;
+            window.closeKioskitoSearchOverlay = closeSearchOverlay;
+
+            function setupNavbarSearchListeners() {
+                const navSearchToggle = document.getElementById('navSearchToggle');
+                const navBuscador = document.getElementById('navBuscador');
+                const navSearchAction = document.getElementById('navSearchAction');
+                const searchOverlay = document.getElementById('search-overlay');
+                const searchOverlayInput = document.getElementById('search-overlay-input');
+                const searchOverlayClose = document.getElementById('search-overlay-close');
+
+                if (navSearchToggle && searchOverlay && searchOverlayClose) {
+                    navSearchToggle.addEventListener('click', () => openSearchOverlay(''));
+                    searchOverlayClose.addEventListener('click', closeSearchOverlay);
+
+                    searchOverlay.addEventListener('click', (event) => {
+                        if (event.target === searchOverlay) {
+                            closeSearchOverlay();
+                        }
+                    });
+                }
+
+                if (searchOverlayInput) {
+                    searchOverlayInput.addEventListener('input', (e) => {
+                        const termino = e.target.value || '';
+                        updateSearchResults(termino);
+                    });
+                }
+
+                if (navBuscador && navSearchAction) {
+                    navSearchAction.addEventListener('click', () => {
+                        const termino = navBuscador.value || '';
+                        openSearchOverlay(termino);
+                    });
+
+                    navBuscador.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            navSearchAction.click();
+                        }
+                    });
+                }
+            }
+
+            setupNavbarSearchListeners();
+            const navbarRetry = setInterval(setupNavbarSearchListeners, 100);
+            setTimeout(() => clearInterval(navbarRetry), 5000);
+
             filterButtons.forEach((button) => {
                 button.addEventListener('click', function () {
                     const cat = this.getAttribute('data-filter') || 'all';
@@ -193,45 +303,145 @@
                 });
             });
 
-            // Inicializamos el catálogo
-            renderProductsList(productos);
+            function openProductDetail(productId) {
+                const prod = productos.find((item) => item.id === productId);
+                if (!prod) return;
 
-            // --- LÓGICA DEL BUSCADOR DEL NAVBAR PARA EL INDEX ---
+                const imageUrl = prod.imagen ? encodeURI(prod.imagen) : '';
+                const disponible = prod.disponible !== false;
+                const mensajeWa = encodeURIComponent(`¡Hola! Me interesa consultar por el producto: ${prod.nombre}`);
+                const urlWhatsapp = `https://wa.me/5491130604617?text=${mensajeWa}`;
+
+                document.getElementById('detail-overlay-content').innerHTML = `
+                    <div class="detail-overlay-header">
+                        <img src="${imageUrl}" alt="${prod.nombre}" class="detail-overlay-img">
+                        <div class="detail-overlay-info">
+                            <span class="detail-overlay-category">${prod.categoria || 'Producto'}</span>
+                            <h2>${prod.nombre}</h2>
+                            <p><strong>Bodega:</strong> ${prod.bodega || 'Sin información'}</p>
+                            <p><strong>Variantes:</strong> ${prod.variedades || 'Sin información'}</p>
+                            <p><strong>Región:</strong> ${prod.region || 'Sin información'}</p>
+                            <p><strong>Productor:</strong> ${prod.productor || 'Sin información'}</p>
+                            <div class="detail-overlay-meta">
+                                <span>${disponible ? 'Hay stock disponible' : 'Sin stock actualmente'}</span>
+                                <span>${prod.descripcion || 'Descripción breve no disponible para este producto.'}</span>
+                            </div>
+                            <div class="detail-overlay-actions">
+                                <a href="${urlWhatsapp}" target="_blank" class="detail-overlay-whatsapp">Consultar por WhatsApp</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                const detailOverlay = document.getElementById('detail-overlay');
+                detailOverlay.classList.add('visible');
+                detailOverlay.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeProductDetail() {
+                const detailOverlay = document.getElementById('detail-overlay');
+                detailOverlay.classList.remove('visible');
+                detailOverlay.setAttribute('aria-hidden', 'true');
+                document.getElementById('detail-overlay-content').innerHTML = '';
+                // Si el overlay de búsqueda sigue visible, mantenemos el bloqueo del scroll.
+                if (document.getElementById('search-overlay')?.classList.contains('visible')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            }
+
+            // --- LÓGICA DEL BUSCADOR DEL NAVBAR Y OVERLAY ---
             function attachNavbarSearchListener() {
+                // Conectar el botón de cierre del detalle del producto
+                const detailOverlayElement = document.getElementById('detail-overlay');
+                const detailOverlayCloseElement = document.getElementById('detail-overlay-close');
+                if (detailOverlayElement && detailOverlayCloseElement) {
+                    detailOverlayCloseElement.addEventListener('click', closeProductDetail);
+                    detailOverlayElement.addEventListener('click', (event) => {
+                        if (event.target === detailOverlayElement) closeProductDetail();
+                    });
+                }
                 if (navbarSearchAttached) return;
 
-                const navBuscador = document.getElementById('navBuscador');
-                if (!navBuscador) {
+                const navSearchToggle = document.getElementById('navSearchToggle');
+                if (!navSearchToggle) {
                     window.setTimeout(attachNavbarSearchListener, 100);
                     return;
                 }
 
                 navbarSearchAttached = true;
-                navBuscador.placeholder = 'Buscar vinos';
-                navBuscador.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        ejecutarBusquedaNavbar(e.target.value);
-                    }
-                });
 
+                const productos = Array.isArray(window.listaVinos) ? window.listaVinos : [];
+                const searchOverlay = document.getElementById('search-overlay');
+                const searchOverlayInput = document.getElementById('search-overlay-input');
+                const searchOverlayResults = document.getElementById('search-overlay-results');
+                const searchOverlayClose = document.getElementById('search-overlay-close');
+                const navBuscador = document.getElementById('navBuscador');
                 const navSearchAction = document.getElementById('navSearchAction');
-                if (navSearchAction) {
-                    navSearchAction.addEventListener('click', (event) => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        ejecutarBusquedaNavbar(navBuscador.value);
+
+                const openSearchOverlay = (termino = '') => {
+                    if (!searchOverlay || !searchOverlayInput) return;
+                    searchOverlay.classList.add('visible');
+                    document.body.style.overflow = 'hidden';
+                    searchOverlayInput.value = termino;
+                    updateSearchResults(termino);
+                    searchOverlayInput.focus();
+                };
+
+                const closeSearchOverlay = () => {
+                    if (!searchOverlay || !searchOverlayInput || !searchOverlayResults) return;
+                    searchOverlay.classList.remove('visible');
+                    document.body.style.overflow = '';
+                    searchOverlayInput.value = '';
+                    searchOverlayResults.innerHTML = '';
+                };
+
+                const updateSearchResults = (termino) => {
+                    if (!searchOverlayResults) return;
+                    const terminoNormalizado = normalizeValue(termino);
+                    const resultados = terminoNormalizado ? productos.filter((prod) => matchesSearch(prod, terminoNormalizado)) : productos;
+                    renderProductsList(resultados, 'No encontramos vinos para tu búsqueda', searchOverlayResults);
+                };
+
+                window.openKioskitoSearchOverlay = openSearchOverlay;
+                window.closeKioskitoSearchOverlay = closeSearchOverlay;
+
+                if (searchOverlay && searchOverlayInput && searchOverlayResults && searchOverlayClose) {
+                    navSearchToggle.addEventListener('click', () => openSearchOverlay(''));
+                    searchOverlayClose.addEventListener('click', closeSearchOverlay);
+
+                    searchOverlay.addEventListener('click', (event) => {
+                        if (event.target === searchOverlay) {
+                            closeSearchOverlay();
+                        }
+                    });
+
+                    searchOverlayInput.addEventListener('input', (e) => {
+                        const termino = e.target.value;
+                        updateSearchResults(termino);
                     });
                 }
 
-                document.addEventListener('navbarSearchRequested', (event) => {
-                    const value = event.detail?.value ?? navBuscador.value;
-                    ejecutarBusquedaNavbar(value);
-                });
+                if (navBuscador && navSearchAction) {
+                    navSearchAction.addEventListener('click', () => {
+                        const termino = navBuscador.value || '';
+                        openSearchOverlay(termino);
+                    });
+
+                    navBuscador.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            navSearchAction.click();
+                        }
+                    });
+                }
             }
 
-            attachNavbarSearchListener();
-
+            // Inicializamos el catálogo
+            renderProductsList(Array.isArray(window.listaVinos) ? window.listaVinos : []);
+            document.addEventListener('navbarLoaded', attachNavbarSearchListener);
         } catch (error) {
             console.error('Error al cargar kioskito.html:', error);
             container.innerHTML = '<p style="text-align:center; color:white; padding:20px;">No se pudo cargar el catálogo en este momento.</p>';
@@ -243,4 +453,5 @@
     } else {
         initKioskito();
     }
+
 })();

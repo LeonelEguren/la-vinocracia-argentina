@@ -1202,3 +1202,265 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
   background-color: #8b0000;
   border-color: #8b0000;
 }
+
+.search-overlay-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9998;
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+    /* 🔴 REMOVIDO: padding-bottom: 40px; estaba rompiendo la centración */
+    box-sizing: border-box; /* Corregido error tipográfico border-border-box */
+    background: rgba(10, 10, 10, 0.5);
+}
+
+.search-overlay-container.visible {
+    display: flex;
+}
+
+.search-overlay-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 3rem;
+    color: #FAF8F5;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.search-overlay-content {
+    width: 75vw;
+    max-width: 1000px;
+    
+    /* 🟢 1. ADAPTABILIDAD DE ALTURA */
+    height: fit-content;        /* Se reduce a la altura del contenido */
+    max-height: 82vh;          /* Límite máximo para pantallas chicos */
+    min-height: auto;          /* Quitamos los 500px fijos */
+    
+    margin: 0 auto;
+    border-radius: 24px;
+    
+    /* 🟢 2. ESPACIADO PADRE */
+    padding: 30px 30px 40px 30px; /* 40px abajo dejan libre la zona del fondo */
+    
+    background: rgba(250, 248, 245, 0.98);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+}
+
+.search-overlay-input {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto 24px auto;
+    padding: 1rem 1.5rem;
+    font-size: 1.4rem;
+    font-family: var(--font-body);
+    border: 2px solid rgba(30, 26, 23, 0.3);
+    border-radius: 30px;
+    background-color: #FAF8F5;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    text-align: center;
+    outline: none;
+}
+
+.search-overlay-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    align-items: start;
+    width: 100%;
+    
+    /* 🟢 3. LÓGICA DE SCROLL PARA MÁS DE 1 FILA */
+    /* Calculamos ~380px para dar cabida exacta a 1 tarjeta + su sombra/padding interno */
+    max-height: 385px; 
+    overflow-y: auto;
+    
+    /* Espaciado interno limpio */
+    padding: 10px 10px 15px 10px; 
+    flex: 1;
+    min-height: 0;
+}
+
+.search-overlay-grid .wine-card {
+    width: 85%; /* Ajustado ligeramente para mejor proporción dentro de su celda */
+    padding: 12px !important;
+}
+
+.search-overlay-grid .wine-img-container {
+    height: 220px;
+}
+
+.search-overlay-grid .wine-card {
+    width: 85%; /* Ajustado ligeramente para mejor proporción dentro de su celda */
+    padding: 12px !important;
+}
+
+.search-overlay-grid .wine-img-container {
+  height: 220px;
+}
+
+/* Estilos para la vista de detalle del producto (a usar en el siguiente paso) */
+#product-detail-view {
+    display: none; /* Oculto por defecto */
+    max-width: 900px;
+    margin: 0 auto;
+    background: #FAF8F5;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.detail-img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+}
+
+.detail-overlay-container {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    background: rgba(10, 10, 10, 0.75);
+    z-index: 10000;
+    overflow-y: auto;
+}
+
+.detail-overlay-container.visible {
+    display: flex;
+}
+
+.detail-overlay-card {
+    width: 85%;
+    max-width: 85%;
+    background: #FAF8F5;
+    border-radius: 18px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+    position: relative;
+    padding: 30px;
+    max-height: 90vh; /* Aumentamos ligeramente el alto máximo */
+    overflow-y: hidden; /* Ocultamos el scroll interno */
+}
+
+.detail-overlay-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2.4rem;
+    color: #2c1f18;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.detail-overlay-header {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 25px; /* Reducimos el espacio entre imagen y texto */
+    align-items: start;
+}
+
+.detail-overlay-img {
+    width: 100%;
+    height: 85%; /* La imagen llenará su contenedor */
+    object-fit: contain;
+    border-radius: 14px;
+    background: #f7f0e8;
+    padding: 15px; /* Añade un margen interno para que la imagen no toque los bordes */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el cálculo del max-height */
+    align-self: stretch; /* Se estira para ocupar la altura de la celda de la grilla */
+}
+
+.detail-overlay-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Reducimos el espacio entre los elementos de texto */
+}
+
+.detail-overlay-category {
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: #8b1f24;
+    font-weight: 700; /* Reducimos el tamaño de la categoría */
+}
+
+.detail-overlay-info h2 {
+    margin: 0;
+    font-size: clamp(1.8rem, 2.5vw, 2.5rem); /* Reducimos el tamaño del título */
+    line-height: 1.05;
+}
+
+.detail-overlay-info p {
+    margin: 0;
+    color: #3b3029;
+    line-height: 1.8;
+}
+
+.detail-overlay-meta {
+    display: grid;
+    gap: 8px; /* Reducimos el espacio en la meta-información */
+    padding: 16px 0;
+    color: #4e4237;
+}
+
+.detail-overlay-actions {
+    margin-top: 20px;
+}
+
+.detail-overlay-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #8b1f24;
+    color: #fff;
+    padding: 15px 24px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.detail-overlay-whatsapp:hover {
+    background: #5f1419;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+    .detail-overlay-header {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .search-overlay-input {
+        font-size: 1.2rem;
+        padding: 0.9rem 1.2rem;
+    }
+
+    .search-overlay-grid {
+        gap: 24px;
+    }
+}
