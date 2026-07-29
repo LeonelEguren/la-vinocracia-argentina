@@ -7,7 +7,7 @@ const notasBiblioteca = [
     fecha: "22 Julio, 2026",
     autor: "Mariana Sanchez",
     categoria: "Reseña",
-    imagen: "laBiblioteca/fotoNota01.png",
+    imagen: "fotoNota01.png",
     altImagen: "Botella y copa de vino Criolla en viñedo del Valle de Uco",
     contenido: `
       <p>Pocas veces me pasa que no sé con certeza si me convoca más un lugar o un vino. En líneas generales, encuentro en el vino la excusa para conocer más sobre rincones de nuestro país, su gente, sus paisajes y su cultura; pero en este caso no es strictly de esa forma.</p>
@@ -30,7 +30,7 @@ const notasBiblioteca = [
     fecha: "22 Julio, 2026",
     autor: "Redacción Vinocracia",
     categoria: "Terroir",
-    imagen: "laBiblioteca/fotoNota01.png",
+    imagen: "fotoNota01.png",
     altImagen: "Viñedos en la Quebrada de Humahuaca con cerros de colores de fondo",
     contenido: `
       <p>Hasta hace algunos años, la Quebrada de Humahuaca—uno de los 7 Patrimonios Culturales de la Humanidad del país—era un destino prácticamente exótico dentro de los circuitos turísticos clásicos de Argentina. Nadie cuestionaba la visita a Las Cataratas, a Bariloche o a Mendoza; pero elegir Jujuy como destino no era tan usual como sí lo es hoy.</p>

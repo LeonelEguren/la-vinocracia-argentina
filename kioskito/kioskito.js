@@ -8,11 +8,19 @@
 
     async function initKioskito() {
         try {
-            const response = await fetch('kioskito.html');
+            const response = await fetch('kioskito/kioskito.html');
             if (!response.ok) throw new Error(`No se pudo cargar kioskito.html: ${response.status}`);
 
             container.innerHTML = await response.text();
 
+            // Después de cargar el contenido, verificar si hay un hash en la URL
+            // y desplazarse a él si existe.
+            if (window.location.hash) {
+                const targetElement = document.querySelector(window.location.hash);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
             const catalogGrid = document.getElementById('catalogGrid');
             const filterButtons = container.querySelectorAll('.filter-btn');
 

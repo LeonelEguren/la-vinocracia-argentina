@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Biblioteca | La Vinocracia</title>
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="../estilos.css">
     <!-- Estilos Propios de la sección -->
     <link rel="stylesheet" href="biblioteca.css">
 <body>
@@ -59,47 +59,36 @@
     </main>
 
     <!-- Scripts de la lógica del catálogo y buscador -->
-    <script src="laBiblioteca/notas.js"></script>
+    <script src="notas.js"></script>
     <script src="biblioteca.js"></script>
 
     <!-- Carga del Navbar dinámico -->
     <script>
-        fetch('navbar.html')
+        fetch('../navbar.html')
             .then(res => res.text())
-            .then(text => {
-                document.getElementById('navbar-container').innerHTML = text;
-
-                const toggle = document.getElementById('navSearchToggle');
-                const container = document.querySelector('.nav-search-container');
-                const input = document.getElementById('navBuscador');
-
-                if (toggle && container && input) {
-                    toggle.addEventListener('click', (event) => {
-                        event.stopPropagation();
-                        const isOpen = container.classList.toggle('open');
-                        toggle.classList.toggle('active', isOpen);
-
-                        if (isOpen) {
-                            input.style.width = '160px';
-                            input.style.opacity = '1';
-                            input.style.paddingLeft = '0.8rem';
-                            input.style.paddingRight = '0.8rem';
-                            input.style.marginLeft = '0.5rem';
-                            input.style.pointerEvents = 'auto';
-                            input.focus();
-                        } else {
-                            input.style.width = '0';
-                            input.style.opacity = '0';
-                            input.style.paddingLeft = '0';
-                            input.style.paddingRight = '0';
-                            input.style.marginLeft = '0';
-                            input.style.pointerEvents = 'none';
-                            input.blur();
-                        }
-                    });
-
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                // Corregir la ruta de la imagen del logo
+                const logoImg = doc.querySelector('.logo-img'); // Corrige el logo
+                if (logoImg) {
+                    logoImg.src = '../' + logoImg.getAttribute('src');
                 }
-            })
+
+                // Corregir las rutas de todos los enlaces del navbar
+                const navLinks = doc.querySelectorAll('.nav-menu a, .nav-brand-link');
+                navLinks.forEach(link => {
+                    const originalHref = link.getAttribute('href');
+                    if (originalHref && originalHref.startsWith('index.html')) {
+                        link.setAttribute('href', '../' + originalHref); // Añade ../ a los enlaces que van al index
+                    } else if (originalHref === 'laBiblioteca/laBiblioteca.html') {
+                        link.setAttribute('href', '#'); // Evita recargar la página actual
+                    }
+                });
+                
+                document.getElementById('navbar-container').innerHTML = doc.body.innerHTML; // Inserta el HTML corregido
+             })
             .catch(err => console.error("Error al cargar el navbar:", err));
     </script>
 </body>
