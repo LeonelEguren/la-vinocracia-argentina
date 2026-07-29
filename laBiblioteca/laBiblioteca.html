@@ -15,9 +15,9 @@
     <main class="biblioteca-wrapper">
         
         <!-- ENCABEZADO: Título, Subtítulo y Buscador Dinámico -->
-        <header class="biblioteca-header">
-            <h1>La Biblioteca</h1>
-            <p class="subtitle">Artículos, crónicas y reflexiones alrededor de la copa.</p>
+        <header class="biblioteca-header biblioteca-title">
+            <h1 class="header-title">La Biblioteca</h1>
+            <p class="header-subtitle">Artículos, crónicas y reflexiones alrededor de la copa.</p>
             
         
         </header>
@@ -29,7 +29,6 @@
 
         <!-- VISTA 2: Lector de Nota (Oculto por defecto, abre al hacer click en una Polaroid) -->
         <article id="lectorNota" class="nota-detalle-container" style="display: none;">
-            <button id="btnVolver" class="btn-back">← Volver a La Biblioteca</button>
 
             <div class="nota-layout">
                 <!-- Sidebar con la Polaroid de la nota -->
@@ -77,10 +76,12 @@
                 }
 
                 // Corregir las rutas de todos los enlaces del navbar
-                const navLinks = doc.querySelectorAll('.nav-menu a, .nav-brand-link');
+                const navLinks = doc.querySelectorAll('a[href^="index.html"], a[href="laBiblioteca/laBiblioteca.html"]');
                 navLinks.forEach(link => {
                     const originalHref = link.getAttribute('href');
-                    if (originalHref && originalHref.startsWith('index.html')) {
+                    if (originalHref === 'index.html') {
+                        link.setAttribute('href', '../index.html'); // Corrige el enlace principal al index
+                    } else if (originalHref.startsWith('index.html#')) {
                         link.setAttribute('href', '../' + originalHref); // Añade ../ a los enlaces que van al index
                     } else if (originalHref === 'laBiblioteca/laBiblioteca.html') {
                         link.setAttribute('href', '#'); // Evita recargar la página actual
@@ -88,6 +89,51 @@
                 });
                 
                 document.getElementById('navbar-container').innerHTML = doc.body.innerHTML; // Inserta el HTML corregido
+
+                // Inicializar la lógica del buscador del navbar para ESTA PÁGINA
+                const toggle = document.getElementById('navSearchToggle');
+                const container = document.querySelector('.nav-search-container');
+                const input = document.getElementById('navBuscador');
+                const actionButton = document.getElementById('navSearchAction');
+
+                if (toggle && container && input && actionButton) {
+                    function setSearchUIState(isOpen) {
+                        container.classList.toggle('open', isOpen);
+                        toggle.classList.toggle('active', isOpen);
+                        if (isOpen) {
+                            input.style.width = '160px'; input.style.opacity = '1';
+                            input.style.paddingLeft = '0.8rem'; input.style.paddingRight = '0.8rem';
+                            input.style.marginLeft = '0.5rem'; input.style.pointerEvents = 'auto';
+                            actionButton.style.width = 'auto'; actionButton.style.opacity = '1';
+                            actionButton.style.paddingLeft = '0.8rem'; actionButton.style.paddingRight = '0.8rem';
+                            actionButton.style.marginLeft = '0.4rem'; actionButton.style.pointerEvents = 'auto';
+                            input.focus();
+                        } else {
+                            input.value = ''; input.style.width = '0'; input.style.opacity = '0';
+                            input.style.paddingLeft = '0'; input.style.paddingRight = '0';
+                            input.style.marginLeft = '0'; input.style.pointerEvents = 'none';
+                            actionButton.style.width = '0'; actionButton.style.opacity = '0';
+                            actionButton.style.paddingLeft = '0'; actionButton.style.paddingRight = '0';
+                            actionButton.style.marginLeft = '0'; actionButton.style.pointerEvents = 'none';
+                            input.blur();
+                        }
+                    }
+
+                    toggle.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        setSearchUIState(!container.classList.contains('open'));
+                    });
+
+                    actionButton.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        // En la biblioteca, SIEMPRE disparamos el evento personalizado
+                        document.dispatchEvent(new CustomEvent('navbarSearchRequested', {
+                            detail: { value: input.value.trim() }
+                        }));
+                        setSearchUIState(false);
+                    });
+                }
              })
             .catch(err => console.error("Error al cargar el navbar:", err));
     </script>

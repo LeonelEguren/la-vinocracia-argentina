@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const gridNotas = document.getElementById("gridNotas");
   const lectorNota = document.getElementById("lectorNota");
-  const btnVolver = document.getElementById("btnVolver");
+  const bibliotecaHeader = document.querySelector(".biblioteca-header");
 
   // Renderizar la grilla de Polaroids
   function renderizarGrilla(lista) {
@@ -51,14 +51,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gridNotas.style.display = "none";
     lectorNota.style.display = "block";
+    if (bibliotecaHeader) {
+      bibliotecaHeader.classList.add('clickable-back');
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // Volver a la grilla
-  if (btnVolver) {
-    btnVolver.addEventListener("click", () => {
-      lectorNota.style.display = "none";
-      gridNotas.style.display = "grid";
+  // Volver a la grilla al hacer clic en el header si se está leyendo una nota
+  if (bibliotecaHeader) {
+    bibliotecaHeader.addEventListener("click", () => {
+      // Solo actuar si la vista de nota está activa
+      if (lectorNota.style.display === "block") {
+        lectorNota.style.display = "none";
+        gridNotas.style.display = "grid";
+        bibliotecaHeader.classList.remove('clickable-back');
+      }
     });
   }
 
@@ -68,32 +75,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Escuchar al buscador del Navbar (cargado dinámicamente)
-  // Usamos delegación o un pequeño intervalo para asegurar que el DOM del navbar esté insertado
-  const conectarBuscadorNav = setInterval(() => {
-    const navBuscador = document.getElementById("navBuscador");
-    if (navBuscador) {
-      clearInterval(conectarBuscadorNav);
-      navBuscador.placeholder = "Buscar notas o artículos...";
+  const ejecutarBusqueda = (termino) => {
+    const terminoNormalizado = termino.toLowerCase().trim();
+    if (typeof notasBiblioteca === 'undefined') return;
 
-      navBuscador.addEventListener("input", (e) => {
-        const termino = e.target.value.toLowerCase().trim();
-        
-        if (typeof notasBiblioteca === 'undefined') return;
-
-        const filtradas = notasBiblioteca.filter(nota => 
-          nota.titulo.toLowerCase().includes(termino) ||
-          nota.bajada.toLowerCase().includes(termino) ||
-          nota.categoria.toLowerCase().includes(termino)
-        );
-        
-        // Si estaba leyendo una nota y empieza a buscar, regresa a la grilla
-        if (lectorNota && lectorNota.style.display === "block") {
-          lectorNota.style.display = "none";
-          gridNotas.style.display = "grid";
-        }
-
-        renderizarGrilla(filtradas);
-      });
+    const filtradas = notasBiblioteca.filter(nota => 
+      nota.titulo.toLowerCase().includes(terminoNormalizado) ||
+      nota.bajada.toLowerCase().includes(terminoNormalizado) ||
+      nota.categoria.toLowerCase().includes(terminoNormalizado)
+    );
+    
+    if (lectorNota && lectorNota.style.display === "block") {
+      lectorNota.style.display = "none";
+      gridNotas.style.display = "grid";
+      bibliotecaHeader.classList.remove('clickable-back');
     }
-  }, 100);
+    renderizarGrilla(filtradas);
+  };
+
+  // El evento se dispara desde el script que carga el navbar en laBiblioteca.html
+  document.addEventListener('navbarSearchRequested', (event) => ejecutarBusqueda(event.detail.value));
 });

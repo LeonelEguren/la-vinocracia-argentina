@@ -237,3 +237,61 @@
     position: static;
   }
 }
+
+/* ==========================================================================
+   ESTILO POST-IT PARA EL HEADER DE LA BIBLIOTECA
+   ========================================================================== */
+.biblioteca-title {
+    max-width: 580px;
+    width: 90%;
+    margin: 80px auto 50px auto !important;
+    padding: 40px 40px 35px 40px !important; 
+    position: relative !important;
+    text-align: center !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    overflow: visible !important; 
+    border: none !important;
+    box-shadow: 5px 5px 12px -2px rgba(33,33,33,.45) !important;
+    transition: transform .15s ease;
+    z-index: 1;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.03), rgba(0,0,0,0.12)), var(--postit-blue) !important; 
+    transform: rotate(-2deg) skew(1deg,-1deg) !important;
+}
+
+.biblioteca-title::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 99 !important;
+    background: radial-gradient(circle at 35% 35%, #ff4d4d, #cc0000 60%, #660000) !important;
+    border-radius: 50% !important;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.45) !important;
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.biblioteca-title .header-title {
+    font-family: var(--font-headers) !important;
+    color: #2b251f !important;
+    font-size: 2.5rem !important;
+    margin-bottom: 8px !important;
+}
+
+.biblioteca-title .header-subtitle {
+    font-family: var(--font-body) !important;
+    color: #4a433c !important;
+    font-size: 1.05rem !important;
+}
+
+/* Estilo para cuando el header funciona como botón de "volver" */
+.biblioteca-header.clickable-back {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.biblioteca-header.clickable-back:hover {
+    transform: rotate(-2deg) skew(1deg,-1deg) scale(1.02) !important;
+    box-shadow: 8px 15px 25px -5px rgba(33,33,33,.5) !important;
+}
