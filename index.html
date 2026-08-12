@@ -24,19 +24,24 @@
     <!-- VISTA DE BÚSQUEDA INMERSIVA (OVERLAY)      -->
     <!-- ========================================== -->
     <div id="search-overlay" class="search-overlay-container">
+    
+    <!-- El panel ahora envuelve a la X para que quede dentro del fondo beige -->
+    <div class="search-overlay-content">
         <button id="search-overlay-close" class="search-overlay-close-btn" aria-label="Cerrar búsqueda">&times;</button>
         
-        <div class="search-overlay-content">
-            <!-- Vista 1: Buscador y Grilla de Resultados -->
-            <div id="search-view">
+        <!-- Vista 1: Buscador y Grilla de Resultados -->
+        <div id="search-view">
+            <div class="search-input-wrapper">
                 <input type="text" id="search-overlay-input" class="search-overlay-input" placeholder="Escribí un vino, bodega o región...">
-                <div id="search-overlay-results" class="search-overlay-grid">
-                    <!-- Los resultados de la búsqueda aparecerán aquí -->
-                </div>
             </div>
-
+            
+            <div id="search-overlay-results" class="search-overlay-grid">
+                <!-- Los resultados de la búsqueda aparecerán aquí -->
+            </div>
         </div>
     </div>
+
+</div>
 
     <div id="detail-overlay" class="detail-overlay-container" aria-hidden="true">
         <div class="detail-overlay-card">

@@ -1203,106 +1203,166 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
   border-color: #8b0000;
 }
 
+/* Contenedor Overlay (Fondo oscuro de la pantalla) */
 .search-overlay-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 9998;
-    display: none; /* Oculto por defecto */
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    overflow: hidden;
-    /* 🔴 REMOVIDO: padding-bottom: 40px; estaba rompiendo la centración */
-    box-sizing: border-box; /* Corregido error tipográfico border-border-box */
-    background: rgba(10, 10, 10, 0.5);
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    display: none;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    background: rgba(15, 12, 10, 0.65) !important;
+    z-index: 10000 !important;
+    backdrop-filter: blur(4px);
+    /* ESTO HACE LA MAGIA: El scroll vertical se activa aquí directamente */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
 }
 
 .search-overlay-container.visible {
-    display: flex;
+    display: flex !important;
+}
+.search-overlay-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 50vh !important;
+    background: #FAF8F5 !important;
+    margin: 0 !important;
+    padding: 60px 40px 30px 40px !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
+    position: relative !important;
+    border-radius: 0 0 24px 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
 }
 
 .search-overlay-close-btn {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 3rem;
-    color: #FAF8F5;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-    z-index: 10;
+    position: absolute !important;
+    top: 25px !important;
+    right: 35px !important;
+    font-size: 2.2rem !important;
+    color: #2c1f18 !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    line-height: 1 !important;
+    z-index: 10 !important;
+}
+.search-overlay-close-btn:hover {
+    color: #8b1f24 !important;
+    transform: scale(1.1);
+}
+/* Contenedor del Input para que no se extienda infinito si la pantalla es muy grande */
+.search-input-wrapper {
+    width: 100% !important;
+    max-width: 800px !important;
+    margin: 10px auto 25px auto !important;
 }
 
 .search-overlay-content {
-    width: 75vw;
-    max-width: 1000px;
-    
-    /* 🟢 1. ADAPTABILIDAD DE ALTURA */
-    height: fit-content;        /* Se reduce a la altura del contenido */
-    max-height: 82vh;          /* Límite máximo para pantallas chicos */
-    min-height: auto;          /* Quitamos los 500px fijos */
-    
-    margin: 0 auto;
-    border-radius: 24px;
-    
-    /* 🟢 2. ESPACIADO PADRE */
-    padding: 30px 30px 40px 30px; /* 40px abajo dejan libre la zona del fondo */
-    
-    background: rgba(250, 248, 245, 0.98);
-    box-shadow: 0 30px 80px rgba(0,0,0,0.3);
-    overflow: hidden; 
-    display: flex;
-    flex-direction: column;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-height: auto !important;
+    max-height: none !important; /* Le quitamos el límite para que crezca libremente */
+    background: #FAF8F5 !important;
+    margin: 0 !important;
+    padding: 40px 40px 40px 40px !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
+    position: relative !important;
+    border-radius: 0 0 24px 24px !important;
+    box-sizing: border-box !important;
 }
-
+/* IMPORTANTE: Reseteamos #search-view para que no genere una 'tarjeta' dentro */
+#search-view {
+    width: 100% !important;
+    max-width: 100% !important;
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+/* Input con el mismo estilo redondeado que ya tenés */
 .search-overlay-input {
-    width: 100%;
-    max-width: 100%;
-    display: block;
-    margin: 0 auto 24px auto;
-    padding: 1rem 1.5rem;
-    font-size: 1.4rem;
-    font-family: var(--font-body);
-    border: 2px solid rgba(30, 26, 23, 0.3);
-    border-radius: 30px;
-    background-color: #FAF8F5;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-    text-align: center;
-    outline: none;
+    width: 100% !important;
+    padding: 18px 28px !important;
+    font-size: 1.2rem !important;
+    border: 1px solid #e2d8cd !important;
+    border-radius: 50px !important;
+    background: #ffffff !important;
+    color: #2c1f18 !important;
+    outline: none !important;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.03) !important;
+    box-sizing: border-box !important;
 }
-
+.search-overlay-input::placeholder {
+    color: #8c827a;
+}
+/* 3. La grilla NO debe tener scroll interno */
 .search-overlay-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
-    justify-items: center;
-    align-items: start;
-    width: 100%;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+    gap: 25px !important;
+    width: 100% !important;
+    max-width: 1150px !important;
+    margin: 0 auto !important;
+    padding: 10px 15px 25px 15px !important;
+    box-sizing: border-box !important;
     
-    /* 🟢 3. LÓGICA DE SCROLL PARA MÁS DE 1 FILA */
-    /* Calculamos ~380px para dar cabida exacta a 1 tarjeta + su sombra/padding interno */
-    max-height: 385px; 
-    overflow-y: auto;
-    
-    /* Espaciado interno limpio */
-    padding: 10px 10px 15px 10px; 
-    flex: 1;
-    min-height: 0;
+    /* Quita cualquier scroll interno de la grilla */
+    overflow: visible !important;
+    max-height: none !important;
 }
-
 .search-overlay-grid .wine-card {
     width: 85%; /* Ajustado ligeramente para mejor proporción dentro de su celda */
     padding: 12px !important;
 }
+/* La imagen expandida al 100% */
+.search-overlay-grid .card-img-top,
+.search-overlay-grid .wine-img-container img,
+.search-overlay-grid img {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover !important; /* Cambiá a 'contain' si preferís ver la foto completa sin recortes */
+}
 
 .search-overlay-grid .wine-img-container {
-    height: 220px;
+    height: 220px !important;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #e8e2d9 !important; /* Fondo sutil para la zona limpia */
+    border-radius: 8px !important;
+    margin-bottom: 12px !important;
 }
- 
+/* 3. Ajuste fino de tipografía y espaciados para ganar espacio vertical */
+.search-overlay-grid .card-title,
+.search-overlay-grid h3 {
+    font-size: 1.15rem !important;
+    margin-bottom: 8px !important;
+    line-height: 1.2 !important;
+}
+.search-overlay-grid .card-text,
+.search-overlay-grid p {
+    font-size: 0.85rem !important; /* Un toque más pequeño pero muy legible */
+    line-height: 1.3 !important;
+    margin-bottom: 6px !important;
+}
+
+/* 4. Botón de WhatsApp o consulta compacto */
+.search-overlay-grid .btn,
+.search-overlay-grid button,
+.search-overlay-grid a.btn {
+    padding: 8px 12px !important;
+    font-size: 0.85rem !important;
+    margin-top: 10px !important;
+}
 .search-overlay-grid .wine-card {
     width: 85%; /* Ajustado ligeramente para mejor proporción dentro de su celda */
     padding: 12px !important;
@@ -1464,3 +1524,4 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
         gap: 24px;
     }
 }
+/* Hace las fotos del buscador un poco más estilizadas/compactas */

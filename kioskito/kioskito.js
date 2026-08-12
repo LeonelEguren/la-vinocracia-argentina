@@ -248,8 +248,35 @@
                 searchOverlayResults.innerHTML = '';
             }
 
+            // Spanish-friendly wrappers requested by UI: abrirBuscador / cerrarBuscador
+            function abrirBuscador(termino = '') {
+                openSearchOverlay(termino);
+            }
+
+            function cerrarBuscador() {
+                closeSearchOverlay();
+            }
+
+            // Manejo de tecla ESC para cerrar el overlay cuando esté visible
+            document.addEventListener('keydown', (e) => {
+                try {
+                    const searchOverlay = document.getElementById('search-overlay');
+                    if (!searchOverlay) return;
+                    if (e.key === 'Escape' || e.key === 'Esc') {
+                        if (searchOverlay.classList.contains('visible')) {
+                            cerrarBuscador();
+                        }
+                    }
+                } catch (err) {
+                    // no-op
+                }
+            });
+
             window.openKioskitoSearchOverlay = openSearchOverlay;
             window.closeKioskitoSearchOverlay = closeSearchOverlay;
+            // Exponer nombres en español solicitados
+            window.abrirBuscador = abrirBuscador;
+            window.cerrarBuscador = cerrarBuscador;
 
             function setupNavbarSearchListeners() {
                 const navSearchToggle = document.getElementById('navSearchToggle');
