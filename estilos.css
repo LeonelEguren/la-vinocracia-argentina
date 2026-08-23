@@ -185,8 +185,9 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
 /* ==========================================================================
    TARJETAS DE CONTENIDO: ESTILO FOTOGRAFÍA POLAROID CLAVADA AL CORCHO
    ========================================================================== */
+/* Corrección de la grilla para dar aire al pin superior */
 .events-section, .catalog-section, .trinchera-section { 
-    padding: 40px 20px; 
+    padding: 60px 20px 40px 20px !important; /* Más padding arriba para dar margen al pin de la 1er fila */
     max-width: 1300px; 
     margin: 0 auto;
     background: transparent !important;
@@ -202,34 +203,30 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
     background: transparent !important;
 }
 
-/* Estilo de foto Polaroid */
+/* Forzar que las cards nunca recorten cosas hacia afuera */
 .event-card, .wine-card, .trinchera-card {
     background-color: #FAF8F2 !important; 
     border: none !important;
     border-radius: 0px !important;
-    border-top-left-radius: 0px !important;
-    border-top-right-radius: 0px !important;
-    border-bottom-left-radius: 0px !important;
-    border-bottom-right-radius: 0px !important;
     padding: 16px 16px 32px 16px !important;
-    /* Sombra profunda sobre el fondo texturizado de corcho */
     box-shadow: 5px 12px 24px rgba(0, 0, 0, 0.42) !important;
     position: relative !important;
+    overflow: visible !important; /* CRÍTICO: Permite que el pin vuele fuera de la tarjeta */
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 360px;
-    height: 100%; 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Alfiler individual superior para fijar cada Polaroid */
+/* Anclaje matemático del Pin para las tarjetas */
 .event-card::before, .wine-card::before, .trinchera-card::before {
     content: "" !important;
     position: absolute !important;
-    top: -10px !important;
+    top: 0 !important; /* Apoyado en la línea del borde superior */
     left: 50% !important;
-    transform: translateX(-50%) !important;
+    transform: translate(-50%, -50%) !important; /* Ancla exactamente al centro exacto del pin */
     width: 16px !important;
     height: 16px !important;
     z-index: 85 !important;
@@ -318,20 +315,6 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
 .nav-menu a { color: #1E1A17; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; font-size: 0.8rem; text-decoration: none; transition: color 0.3s ease; white-space: nowrap; }
 .nav-menu a:hover { color: var(--color-wine); }
 
-.main-footer { background-color: #1E1A17; color: #FAF8F5; padding: 60px 20px 30px 20px; position: relative; z-index: 90; }
-.footer-container { max-width: 1200px; margin: 0 auto; }
-.footer-columns { display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; margin-bottom: 40px; }
-.footer-logo { font-family: var(--font-headers); font-size: 2.2rem; }
-.footer-description { opacity: 0.7; font-size: 0.95rem; line-height: 1.6; max-width: 320px; }
-.footer-column-title { color: var(--color-sun); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; font-weight: 700; }
-.footer-column ul { list-style: none; }
-.footer-column ul li { margin-bottom: 12px; }
-.footer-link { color: #FAF8F5; text-decoration: none; opacity: 0.8; }
-.footer-link:hover { color: var(--color-sun); opacity: 1; }
-.social-wrapper { display: flex; gap: 12px; }
-.social-icon { display: inline-flex; width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255,255,255,0.05); color: #FAF8F5; align-items: center; justify-content: center; text-decoration: none; }
-.social-icon:hover { background-color: #FAF8F5; color: #1E1A17; }
-.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; display: flex; justify-content: space-between; font-size: 0.85rem; opacity: 0.6; }
 
 .modal-overlay { 
     position: fixed; 
@@ -466,8 +449,7 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
         gap: 35px;
         padding: 0 10px;
     }
-    .footer-columns { flex-direction: column; text-align: center; }
-    .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+ 
 }
 /* ==========================================================================
    POLAROID "NOSOTROS" AL COSTADO DEL MANIFIESTO

@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Biblioteca | La Vinocracia</title>
+    
+    <!-- FontAwesome para los íconos del footer -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="../estilos.css">
     <!-- Estilos Propios de la sección -->
     <link rel="stylesheet" href="biblioteca.css">
+    <link rel="stylesheet" href="../footer.css">
+</head>
 <body>
 
     <!-- Contenedor para el Navbar (se carga dinámicamente) -->
@@ -18,8 +24,6 @@
         <header class="biblioteca-header biblioteca-title">
             <h1 class="header-title">La Biblioteca</h1>
             <p class="header-subtitle">Artículos, crónicas y reflexiones alrededor de la copa.</p>
-            
-        
         </header>
 
         <!-- VISTA 1: Grilla de Polaroids (Se renderiza desde notas.js / biblioteca.js) -->
@@ -57,6 +61,28 @@
 
     </main>
 
+    <!-- FOOTER INSTITUCIONAL CENTRADO -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            
+            <div class="social-wrapper">
+                <a href="https://wa.me/5491161952385" target="_blank" class="social-icon" title="WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" class="social-icon" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="mailto:vinocracia@gmail.com" class="social-icon" title="Correo Electrónico">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+
+            <p class="developer-signature">Desarrollado por <span>Bilba Design</span></p>
+            <div class="legal-notice">Beber con moderación. Prohibida su venta a menores de 18 años.</div>
+
+        </div>
+    </footer>
+
     <!-- Scripts de la lógica del catálogo y buscador -->
     <script src="notas.js"></script>
     <script src="biblioteca.js"></script>
@@ -70,7 +96,7 @@
                 const doc = parser.parseFromString(html, 'text/html');
                 
                 // Corregir la ruta de la imagen del logo
-                const logoImg = doc.querySelector('.logo-img'); // Corrige el logo
+                const logoImg = doc.querySelector('.logo-img'); 
                 if (logoImg) {
                     logoImg.src = '../' + logoImg.getAttribute('src');
                 }
@@ -80,17 +106,17 @@
                 navLinks.forEach(link => {
                     const originalHref = link.getAttribute('href');
                     if (originalHref === 'index.html') {
-                        link.setAttribute('href', '../index.html'); // Corrige el enlace principal al index
+                        link.setAttribute('href', '../index.html'); 
                     } else if (originalHref.startsWith('index.html#')) {
-                        link.setAttribute('href', '../' + originalHref); // Añade ../ a los enlaces que van al index
+                        link.setAttribute('href', '../' + originalHref); 
                     } else if (originalHref === 'laBiblioteca/laBiblioteca.html') {
-                        link.setAttribute('href', '#'); // Evita recargar la página actual
+                        link.setAttribute('href', '#'); 
                     }
                 });
                 
-                document.getElementById('navbar-container').innerHTML = doc.body.innerHTML; // Inserta el HTML corregido
+                document.getElementById('navbar-container').innerHTML = doc.body.innerHTML; 
 
-                // Inicializar la lógica del buscador del navbar para ESTA PÁGINA
+                // Inicializar la lógica del buscador del navbar
                 const toggle = document.getElementById('navSearchToggle');
                 const container = document.querySelector('.nav-search-container');
                 const input = document.getElementById('navBuscador');
@@ -127,7 +153,6 @@
                     actionButton.addEventListener('click', (event) => {
                         event.preventDefault();
                         event.stopPropagation();
-                        // En la biblioteca, SIEMPRE disparamos el evento personalizado
                         document.dispatchEvent(new CustomEvent('navbarSearchRequested', {
                             detail: { value: input.value.trim() }
                         }));
