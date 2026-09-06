@@ -351,7 +351,7 @@
                             <p><strong>Productor:</strong> ${prod.productor || 'Sin información'}</p>
                             <div class="detail-overlay-meta">
                                 <span>${disponible ? 'Hay stock disponible' : 'Sin stock actualmente'}</span>
-                                <span>${prod.descripcion || 'Descripción breve no disponible para este producto.'}</span>
+                                <span>${prod.detalle || 'Descripción breve no disponible para este producto.'}</span>
                             </div>
                             <div class="detail-overlay-actions">
                                 <a href="${urlWhatsapp}" target="_blank" class="detail-overlay-whatsapp">Consultar por WhatsApp</a>
