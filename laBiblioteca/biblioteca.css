@@ -294,9 +294,10 @@
 }
 
 .biblioteca-title .header-title {
-    font-family: var(--font-headers) !important;
+  font-family: 'Montserrat', sans-serif !important;
     color: #2b251f !important;
     font-size: 2.5rem !important;
+  font-weight: 700 !important;
     margin-bottom: 8px !important;
 }
 

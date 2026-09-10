@@ -989,6 +989,38 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
         height: 92px;
     }
 }
+
+@media (max-width: 768px) {
+    .manifesto-section {
+        padding-bottom: 140px;
+    }
+
+    .manifesto-section .sticker-vinoarg {
+        margin-top: -40px;
+    }
+
+    .manifesto-section .sticker-vinocracia,
+    .manifesto-section .sticker-noviembre {
+        position: absolute;
+        top: auto;
+        bottom: auto;
+        margin: 0;
+    }
+
+    .manifesto-section .sticker-vinocracia {
+        left: calc(50% - 104px);
+        right: auto;
+        bottom: 42px;
+        transform: rotate(-7deg);
+    }
+
+    .manifesto-section .sticker-noviembre {
+        left: calc(50% + 12px);
+        right: auto;
+        bottom: 14px;
+        transform: rotate(6deg);
+    }
+}
 /* Asegura que el contenedor de la página independiente use todo el alto disponible */
 .infocracia-section-page {
     position: relative;
