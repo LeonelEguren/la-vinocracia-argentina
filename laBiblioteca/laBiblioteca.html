@@ -119,6 +119,23 @@
                 
                 document.getElementById('navbar-container').innerHTML = doc.body.innerHTML; 
 
+                const menuToggle = document.querySelector('.nav-menu-toggle');
+                const navMenu = document.querySelector('.nav-menu');
+                if (menuToggle && navMenu) {
+                    menuToggle.addEventListener('click', () => {
+                        const isOpen = navMenu.classList.toggle('is-open');
+                        menuToggle.setAttribute('aria-expanded', String(isOpen));
+                        menuToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+                    });
+                    navMenu.querySelectorAll('a').forEach(link => {
+                        link.addEventListener('click', () => {
+                            navMenu.classList.remove('is-open');
+                            menuToggle.setAttribute('aria-expanded', 'false');
+                            menuToggle.setAttribute('aria-label', 'Abrir menú');
+                        });
+                    });
+                }
+
                 // Inicializar la lógica del buscador del navbar
                 const toggle = document.getElementById('navSearchToggle');
                 const container = document.querySelector('.nav-search-container');

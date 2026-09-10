@@ -146,6 +146,22 @@ document.addEventListener("DOMContentLoaded", initSharedComponents);
             .then(res => res.text())
             .then(text => {
                 document.getElementById('navbar-container').innerHTML = text;
+                const menuToggle = document.querySelector('.nav-menu-toggle');
+                const navMenu = document.querySelector('.nav-menu');
+                if (menuToggle && navMenu) {
+                    menuToggle.addEventListener('click', () => {
+                        const isOpen = navMenu.classList.toggle('is-open');
+                        menuToggle.setAttribute('aria-expanded', String(isOpen));
+                        menuToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+                    });
+                    navMenu.querySelectorAll('a').forEach(link => {
+                        link.addEventListener('click', () => {
+                            navMenu.classList.remove('is-open');
+                            menuToggle.setAttribute('aria-expanded', 'false');
+                            menuToggle.setAttribute('aria-label', 'Abrir menú');
+                        });
+                    });
+                }
                 // Avisamos a toda la aplicación que el navbar está listo.
                 document.dispatchEvent(new Event('navbarLoaded'));
             });
