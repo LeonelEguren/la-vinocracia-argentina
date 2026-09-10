@@ -10,6 +10,7 @@
             if (!response.ok) throw new Error(`No se pudo cargar kioskito.html: ${response.status}`);
 
             container.innerHTML = await response.text();
+            container.removeAttribute('aria-busy');
 
             // Después de cargar el contenido, verificar si hay un hash en la URL
             // y desplazarse a él si existe.

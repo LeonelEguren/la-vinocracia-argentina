@@ -232,6 +232,55 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
     background: transparent !important;
 }
 
+.async-section-loading {
+    min-height: 560px;
+}
+
+.loading-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.loading-card {
+    height: 440px;
+    padding: 16px 16px 32px;
+    background: rgba(250, 248, 242, 0.75);
+    box-shadow: 5px 12px 24px rgba(0, 0, 0, 0.18);
+}
+
+.loading-image,
+.loading-line {
+    display: block;
+    background: linear-gradient(100deg, rgba(220, 214, 202, 0.55) 25%, rgba(244, 240, 232, 0.85) 45%, rgba(220, 214, 202, 0.55) 65%);
+    background-size: 250% 100%;
+    animation: loading-shimmer 1.4s ease-in-out infinite;
+}
+
+.loading-image {
+    width: 100%;
+    height: 280px;
+}
+
+.loading-line {
+    width: 72%;
+    height: 12px;
+    margin-top: 18px;
+}
+
+.loading-line-title {
+    width: 88%;
+    height: 18px;
+    margin-top: 20px;
+}
+
+@keyframes loading-shimmer {
+    from { background-position: 100% 0; }
+    to { background-position: -100% 0; }
+}
+
 /* Forzar que las cards nunca recorten cosas hacia afuera */
 .event-card, .wine-card, .trinchera-card {
     background-color: #FAF8F2 !important; 
@@ -269,9 +318,9 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
 }
 
 /* Inclinaciones realistas de las fotos */
-.events-grid .event-card-link:nth-child(odd) .event-card,
+.events-grid .event-card:nth-child(odd),
 .catalog-grid .wine-card:nth-child(3n+1) { transform: rotate(-1.5deg); }
-.events-grid .event-card-link:nth-child(even) .event-card,
+.events-grid .event-card:nth-child(even),
 .catalog-grid .wine-card:nth-child(3n+2) { transform: rotate(2deg); }
 .trinchera-grid .trinchera-card:nth-child(odd) { transform: rotate(1.2deg); }
 .trinchera-grid .trinchera-card:nth-child(even) { transform: rotate(-2deg); }
@@ -543,6 +592,18 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
         grid-template-columns: minmax(0, 1fr);
         gap: 35px;
         padding: 0;
+    }
+
+    .loading-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 35px;
+        padding: 0 10px;
+    }
+
+    .loading-card {
+        width: min(100%, 360px);
+        height: 440px;
+        margin: 0 auto;
     }
 
     .events-section {

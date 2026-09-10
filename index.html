@@ -92,10 +92,16 @@
             </div> -->
 
             <!-- En el cuerpo de tu index.html ENCUENTROS-->
-<div id="encuentros-container"></div>
+<div id="encuentros-container" class="async-section-loading" aria-busy="true">
+    <div class="loading-grid" aria-hidden="true">
+        <div class="loading-card"><span class="loading-image"></span><span class="loading-line loading-line-title"></span><span class="loading-line"></span></div>
+        <div class="loading-card"><span class="loading-image"></span><span class="loading-line loading-line-title"></span><span class="loading-line"></span></div>
+        <div class="loading-card"><span class="loading-image"></span><span class="loading-line loading-line-title"></span><span class="loading-line"></span></div>
+    </div>
+</div>
 
 <script>
-function initSharedComponents() {
+function initEncuentros() {
     // Carga del Navbar
     fetch('navbar.html')
         .then(res => res.text())
@@ -109,6 +115,7 @@ function initSharedComponents() {
         .then(res => res.text())
         .then(html => {
             document.getElementById('encuentros-container').innerHTML = html;
+            document.getElementById('encuentros-container').removeAttribute('aria-busy');
 
             const encuentroCards = document.querySelectorAll('#encuentros-container .event-card');
             const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)');
@@ -148,7 +155,7 @@ function initSharedComponents() {
         });
 }
 
-document.addEventListener("DOMContentLoaded", initSharedComponents);
+document.addEventListener("DOMContentLoaded", initEncuentros);
 </script>
 
     <!-- ========================================== -->
@@ -156,7 +163,13 @@ document.addEventListener("DOMContentLoaded", initSharedComponents);
     <!-- ========================================== -->
    
     <!-- El contenedor del Kioskito se cargará aquí -->
-    <div id="kioskito-container"></div>
+    <div id="kioskito-container" class="async-section-loading" aria-busy="true">
+        <div class="loading-grid" aria-hidden="true">
+            <div class="loading-card"><span class="loading-image"></span><span class="loading-line loading-line-title"></span><span class="loading-line"></span></div>
+            <div class="loading-card"><span class="loading-image"></span><span class="loading-line loading-line-title"></span><span class="loading-line"></span></div>
+            <div class="loading-card"><span class="loading-image"></span><span class="loading-line loading-line-title"></span><span class="loading-line"></span></div>
+        </div>
+    </div>
 
     <script src="kioskito/vinos.js"></script>
     <script src="kioskito/kioskito.js"></script>
