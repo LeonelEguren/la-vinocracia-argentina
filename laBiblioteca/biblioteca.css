@@ -37,15 +37,15 @@
 /* Grilla de Polaroids */
 .polaroid-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.4rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
   padding: 1rem 0;
   align-items: start;
 }
 
 .biblioteca-card {
   background-color: #FAF8F2;
-  padding: 12px 12px 18px;
+  padding: 16px 16px 32px;
   box-shadow: 5px 12px 24px rgba(0, 0, 0, 0.42);
   position: relative;
   cursor: pointer;
@@ -53,8 +53,9 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 260px;
+  max-width: 360px;
   margin: 0 auto;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .biblioteca-card::before {
@@ -102,7 +103,7 @@
 
 .biblioteca-card-image {
   width: 100%;
-  height: 180px;
+  height: 280px;
   overflow: hidden;
   background-color: #EBE7DF;
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -120,33 +121,35 @@
 }
 
 .biblioteca-card-caption {
-  font-family: var(--font-manuscrita, 'Caveat', cursive);
+  font-family: 'Montserrat', sans-serif;
   color: #1E1A17;
-  margin-top: 10px;
+  margin-top: 15px;
   text-align: center;
 }
 
 .biblioteca-card-tag {
   display: inline-block;
   margin-bottom: 0.35rem;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   color: #852229;
 }
 
 .biblioteca-card-caption h3 {
-  font-size: 1.1rem;
+  font-family: var(--font-headers, 'DM Serif Display', serif);
+  font-size: 1.3rem;
   line-height: 1.2;
-  margin-bottom: 0.35rem;
+  margin: 5px 0;
 }
 
 .biblioteca-card-caption p {
-  font-size: 0.8rem;
-  line-height: 1.35;
+  font-size: 0.85rem;
+  line-height: 1.5;
   color: #4b433d;
-  font-family: var(--font-body, 'Space Grotesk', sans-serif);
+  font-family: 'Montserrat', sans-serif;
+  opacity: 0.9;
 }
 
 /* Botón Volver */
@@ -249,6 +252,16 @@
 
 /* Responsivo para móviles */
 @media (max-width: 768px) {
+  .polaroid-grid {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 1rem 16px;
+  }
+
+  .biblioteca-card {
+    width: 100%;
+    max-width: 360px;
+  }
+
   .nota-layout {
     flex-direction: column;
   }

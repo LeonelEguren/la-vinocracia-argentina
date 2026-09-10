@@ -6,7 +6,7 @@
 
     async function initKioskito() {
         try {
-            const response = await fetch('kioskito/kioskito.html');
+            const response = await fetch(window.kioskitoHtmlPath || 'kioskito/kioskito.html');
             if (!response.ok) throw new Error(`No se pudo cargar kioskito.html: ${response.status}`);
 
             container.innerHTML = await response.text();
@@ -469,6 +469,7 @@
             // Inicializamos el catálogo
             renderProductsList(Array.isArray(window.listaVinos) ? window.listaVinos : []);
             document.addEventListener('navbarLoaded', attachNavbarSearchListener);
+            attachNavbarSearchListener();
         } catch (error) {
             console.error('Error al cargar kioskito.html:', error);
             container.innerHTML = '<p style="text-align:center; color:white; padding:20px;">No se pudo cargar el catálogo en este momento.</p>';
