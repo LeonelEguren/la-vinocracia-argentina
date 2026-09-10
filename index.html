@@ -64,7 +64,11 @@
         <div class="polaroid-img-container">
             <img src="img/Main/nosotros01.png" alt="Nosotros 01" class="polaroid-photo">
         </div>
-        <div class="polaroid-caption">¿Quiénes somos?</div>
+        <div class="polaroid-caption">Maru y Gasti</div>
+    </div>
+
+    <div class="manifesto-sticker sticker-vinoarg">
+        <img src="img/Main/logo_vinoarg.png" alt="Logo Vino Argentino" class="sticker-img">
     </div>
 
     <div class="manifesto-content">
@@ -72,14 +76,12 @@
              Queremos que sea desde un lugar cercano, consciente y sobre todo honesto. Bienvenidxs!</p>
     </div>
 
-    <div class="polaroid-nosotros foto-02">
-        <div class="polaroid-img-container">
-            <img src="img/Main/nosotros02.png" alt="Nosotros 02" class="polaroid-photo">
-        </div>
-        <div class="polaroid-caption">A ciegas!</div>
+    <div class="manifesto-sticker sticker-vinocracia">
+        <img src="img/Main/logo01.png" alt="Logo La Vinocracia" class="sticker-img">
     </div>
-    <div class="sticker-logo">
-        <img src="img/Main/logo01.png" alt="Sticker Vinilo" class="sticker-img">
+    <div class="manifesto-sticker sticker-noviembre">
+        <img src="img/Main/24 de noviembre.jfif" alt="24 de noviembre" class="sticker-img">
+    </div>
 </section>
  <section id="mendoza" class="events-section">
         <div class="events-container">
@@ -107,6 +109,25 @@ function initSharedComponents() {
         .then(res => res.text())
         .then(html => {
             document.getElementById('encuentros-container').innerHTML = html;
+
+            const encuentroCards = document.querySelectorAll('#encuentros-container .event-card');
+            const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)');
+
+            encuentroCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    if (!isTouchDevice.matches) return;
+                    if (document.activeElement === card) {
+                        card.blur();
+                    } else {
+                        card.focus();
+                    }
+                });
+            });
+
+            document.addEventListener('click', event => {
+                if (!isTouchDevice.matches || event.target.closest('#encuentros-container .event-card')) return;
+                document.querySelector('#encuentros-container .event-card:focus')?.blur();
+            });
         });
 
     // Carga del Modal

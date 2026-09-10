@@ -75,7 +75,7 @@
                                 <p class="wine-description" style="margin: 4px 0; font-size: 0.85rem; opacity: 0.9;"><strong>Categoría:</strong> ${prod.categoria || 'Sin información'}</p>
                             </div>
                             <a href="${urlWhatsapp}" target="_blank" class="wine-btn-consultar">
-                                ${disponible ? 'Consultar Vía WhatsApp' : 'Consultar Próxima Tanda'}
+                                ${disponible ? 'Consultar vía WhatsApp' : 'Consultar próxima tanda'}
                             </a>
                         </div>
                     `;
@@ -350,11 +350,11 @@
                             <p><strong>Región:</strong> ${prod.region || 'Sin información'}</p>
                             <p><strong>Productor:</strong> ${prod.productor || 'Sin información'}</p>
                             <div class="detail-overlay-meta">
-                                <span>${disponible ? 'Hay stock disponible' : 'Sin stock actualmente'}</span>
+                                ${disponible ? '' : '<span>Sin stock actualmente</span>'}
                                 <span>${prod.detalle || 'Descripción breve no disponible para este producto.'}</span>
                             </div>
                             <div class="detail-overlay-actions">
-                                <a href="${urlWhatsapp}" target="_blank" class="detail-overlay-whatsapp">Consultar por WhatsApp</a>
+                                <a href="${urlWhatsapp}" target="_blank" class="detail-overlay-whatsapp">Consultar vía WhatsApp</a>
                             </div>
                         </div>
                     </div>

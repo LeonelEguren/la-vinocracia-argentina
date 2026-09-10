@@ -165,10 +165,11 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
 /* ==========================================================================
    TEXTOS INTERNOS DE LOS ENCABEZADOS
    ========================================================================== */
-.catalog-title h1, .main-header h1, .section-title-white h2, .trinchera-title h2 {
-    font-family: var(--font-headers) !important;
+.catalog-title h1, .catalog-title h2, .main-header h1, .section-title-white h2, .trinchera-title h2 {
+    font-family: 'Montserrat', sans-serif !important;
     color: #2b251f !important;
     font-size: 2.5rem !important;
+    font-weight: 700 !important;
     margin-bottom: 8px !important;
     background: transparent !important;
 }
@@ -191,6 +192,34 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
     max-width: 1300px; 
     margin: 0 auto;
     background: transparent !important;
+}
+
+#mendoza {
+    padding: 0 !important;
+    max-width: none;
+}
+
+#encuentros-container > .events-section {
+    padding-top: 20px !important;
+}
+
+#encuentros-container .section-title-white {
+    margin-top: 20px !important;
+    margin-bottom: 30px !important;
+}
+
+#deOrigen {
+    padding: 0 !important;
+    max-width: none;
+}
+
+#deOrigen > .trinchera-section {
+    padding-top: 20px !important;
+}
+
+#deOrigen .trinchera-title {
+    margin-top: 20px !important;
+    margin-bottom: 30px !important;
 }
 
 .events-grid, .catalog-grid, .trinchera-grid {
@@ -273,13 +302,12 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
     transition: opacity 0.25s ease, visibility 0.25s ease;
     z-index: 2;
 }
-.event-card:hover .hover-overlay,
-.event-card:focus .hover-overlay {
+.event-card:hover .hover-overlay {
     opacity: 1;
     visibility: visible;
 }
 .hover-text { color: #fff; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 400; line-height: 1.5; text-align: left; }
-.event-card:focus { outline: 3px solid var(--color-sun); outline-offset: 5px; }
+.event-card:focus { outline: none; }
 .event-title, .wine-title, .amigo-name { font-family: var(--font-headers) !important; color: #1E1A17 !important; margin: 12px 0 6px 0; font-size: 1.3rem; }
 .event-description, .wine-description, .amigo-bio, .event-date, .wine-price, .event-location { color: #3A332D !important; font-size: 0.95rem; line-height: 1.4; }
 .event-card .event-description { margin: 4px 0; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 400; line-height: 1.5; opacity: 0.9; }
@@ -287,7 +315,7 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
 .whatsapp-btn { display: flex; align-items: center; justify-content: center; background-color: var(--color-wine); color: #FAF8F5 !important; padding: 12px; text-decoration: none; font-family: var(--font-body); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px; margin-top: 10px; transition: background-color 0.2s ease; }
 .whatsapp-btn:hover { background-color: #5c161b; }
 .trinchera-badge, .badge, .manifesto-divider { display: none !important; }
-.amigo-instagram { display: inline-flex; align-items: center; color: #1E1A17; text-decoration: none; font-weight: 500; margin-top: 15px; border: 1px solid rgba(0,0,0,0.15); padding: 6px 12px; border-radius: 4px; }
+.amigo-instagram { display: inline-flex; align-items: center; gap: 8px; color: #1E1A17; text-decoration: none; font-weight: 500; margin-top: 15px; border: 1px solid rgba(0,0,0,0.15); padding: 6px 12px; border-radius: 4px; }
 .amigo-instagram:hover { background-color: #1E1A17; color: #FAF8F5 !important; }
 
 /* ==========================================================================
@@ -502,7 +530,7 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
         max-width: 92%;
         padding: 25px 25px !important;
     }
-    .catalog-title h1, .main-header h1, .section-title-white h2, .trinchera-title h2 { font-size: 2rem !important; }
+    .catalog-title h1, .catalog-title h2, .main-header h1, .section-title-white h2, .trinchera-title h2 { font-size: 2rem !important; }
     
     .manifesto-content { padding: 55px 20px 30px 35px; }
     .manifesto-content p { font-size: 1.55rem; line-height: 2.2rem; }
@@ -554,6 +582,16 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
     .hover-text {
         font-size: 0.8rem;
         line-height: 1.45;
+    }
+
+    .event-card:hover .hover-overlay {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .event-card:focus .hover-overlay {
+        opacity: 1;
+        visibility: visible;
     }
  
 }
@@ -773,8 +811,8 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
 /* --- Foto 01: Clavada a la IZQUIERDA --- */
 .polaroid-nosotros.foto-01 {
     left: 2%;
-    top: 25%; /* Un poco más arriba */
-    transform: rotate(-4deg);
+    top: 15%;
+    transform: translateY(-20%) rotate(-4deg);
 }
 
 /* --- Foto 02: Clavada a la DERECHA --- */
@@ -816,6 +854,12 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
     z-index: 99 !important; /* Se va al frente de todo al pasar el mouse */
 }
 
+.polaroid-nosotros.foto-01,
+.polaroid-nosotros.foto-01:hover {
+    transform: translateY(-20%) rotate(-4deg) !important;
+    box-shadow: 6px 12px 24px rgba(0, 0, 0, 0.45) !important;
+}
+
 /* ==========================================================================
    PIN ROJO MATEMÁTICO EN EL BORDE DE LAS FOTOS
    ========================================================================== */
@@ -855,30 +899,21 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
     .polaroid-nosotros.foto-02 { transform: rotate(3deg); }
 }
 
-/* ==========================================================================
-   STICKER DE VINILO REALISTA - POSICIÓN: ABAJO A LA DERECHA
+/* ========================================================================== 
+   STICKERS ALREDEDOR DEL MANIFIESTO
    ========================================================================== */
-.sticker-logo {
+.manifesto-sticker {
     position: absolute;
-    /* Lo anclamos abajo a la derecha respecto a la sección del manifiesto */
-    right: 14%; 
-    bottom: 8%;
-    width: 110px; /* Tamaño de sticker de vinilo */
-    height: 110px;
-    z-index: 75; /* Por encima del manifiesto y levemente de la Polaroid derecha */
-    
-    /* Efecto troquelado blanco */
-    background-color: #ffffff !important;
-    padding: 8px !important;
-    border-radius: 50% !important; 
-    
-    /* Sombra de papel plano adherido al corcho */
-    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.5) !important;
-    
-    /* Rotación hacia la derecha para cambiar el ángulo */
-    transform: rotate(10deg); 
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
+    width: 112px;
+    height: 112px;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid rgba(30, 26, 23, 0.12);
+    border-radius: 50%;
+    overflow: hidden;
+    pointer-events: none;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.35);
+    z-index: 75;
 }
 
 .sticker-img {
@@ -888,33 +923,70 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
     display: block;
 }
 
-/* Efecto hover */
-.sticker-logo:hover {
-    transform: rotate(6deg) scale(1.08) !important;
-    box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.55) !important;
+.sticker-vinoarg {
+    left: 17%;
+    top: 85%;
+    transform: rotate(-8deg);
 }
 
-/* ==========================================================================
-   RESPONSIVE AJUSTADO
-   ========================================================================== */
-@media (max-width: 1400px) {
-    .sticker-logo {
-        right: 4%; /* Lo pega un toque más al borde si la pantalla se achica */
-        bottom: 5%;
-        width: 95px;
-        height: 95px;
-    }
+.sticker-vinoarg .sticker-img {
+    transform: scale(1.25);
+}
+
+.sticker-vinocracia {
+    right: 1%;
+    top: 7%;
+    transform: rotate(7deg);
+}
+
+.sticker-noviembre {
+    right: 1%;
+    bottom: 3%;
+    width: 125px;
+    height: 125px;
+    transform: rotate(-6deg);
 }
 
 @media (max-width: 1150px) {
-    .sticker-logo {
-        position: relative !important;
-        right: auto !important;
-        bottom: auto !important;
-        /* En mobile vuelve al flujo abajo de las fotos con un margen limpio */
-        margin: 30px auto 10px auto !important; 
-        transform: rotate(6deg);
-        display: block;
+    .manifesto-sticker {
+        position: relative;
+        inset: auto;
+        width: 96px;
+        height: 96px;
+        margin: 18px 8px 8px;
+    }
+
+    .sticker-vinoarg {
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+    }
+
+    .sticker-vinocracia,
+    .sticker-noviembre {
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+    }
+
+    .sticker-noviembre {
+        width: 108px;
+        height: 108px;
+    }
+}
+
+@media (max-width: 600px) {
+    .manifesto-sticker {
+        width: 82px;
+        height: 82px;
+        margin: 14px 5px 4px;
+    }
+
+    .sticker-noviembre {
+        width: 92px;
+        height: 92px;
     }
 }
 /* Asegura que el contenedor de la página independiente use todo el alto disponible */
@@ -1578,19 +1650,30 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
     margin-top: 20px;
 }
 
+.wine-btn-consultar,
 .detail-overlay-whatsapp {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #8b1f24;
-    color: #fff;
-    padding: 15px 24px;
-    border-radius: 999px;
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--color-wine);
+    color: #FAF8F5 !important;
+    padding: 10px 14px;
+    border: 1px solid var(--color-wine);
+    border-radius: 4px;
     text-decoration: none;
-    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: none;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
+.wine-btn-consultar:hover,
 .detail-overlay-whatsapp:hover {
     background: #5f1419;
     transform: translateY(-1px);
@@ -1676,10 +1759,6 @@ div.trinchera-title      { background: linear-gradient(to bottom, rgba(0,0,0,0.0
     .detail-overlay-actions {
         margin-top: 10px;
         padding-bottom: 8px;
-    }
-
-    .detail-overlay-whatsapp {
-        width: 100%;
     }
 
     .search-overlay-input {
