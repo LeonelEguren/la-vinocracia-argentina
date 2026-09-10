@@ -89,67 +89,46 @@
                 <h3 class="event-title">Seccion en construcción</h3>
             </div> -->
 
-    <section id="encuentros" class="events-section">
-        <div class="events-container">
-            <!-- POST-IT ENCUENTROS -->
-            <div class="section-title-white">
-                <h2>Próximos Encuentros</h2>
-            </div>
+            <!-- En el cuerpo de tu index.html ENCUENTROS-->
+<div id="encuentros-container"></div>
 
-            <div class="events-grid">
-                <a href="https://wa.me/5491112345678?text=%C2%A1Quiero%20una%20reserva!" target="_blank" class="event-card-link">
-                    <div class="event-card">
-                        <div class="image-container">
-                            <div class="hover-overlay">
-                                <span class="hover-text">Reservar</span>
-                            </div>
-                            <img src="img/eventos/evento1.png" alt="La Vinocracia invade Panza" class="card-img">
-                        </div>
-                        <div class="event-details">
-                            <span class="event-date">Sábado 25 de Abril - 19 Hs.</span>
-                            <h3 class="event-title">La Vinocracia invade Panza</h3>
-                            <p class="event-description">Nos movemos para copar el espacio de Pte. Panza con lo mejor de nuestros vinos seleccionados.</p>
-                            <div class="event-location">📍 Pueyrredón 846, Lomas de Zamora</div>
-                        </div>
-                    </div>
-                </a>
+<script>
+function initSharedComponents() {
+    // Carga del Navbar
+    fetch('navbar.html')
+        .then(res => res.text())
+        .then(text => {
+            document.getElementById('navbar-container').innerHTML = text;
+            document.dispatchEvent(new Event('navbarLoaded'));
+        });
 
-                <a href="https://wa.me/5491112345678?text=%C2%A1Quiero%20una%20reserva!" target="_blank" class="event-card-link">
-                    <div class="event-card">
-                        <div class="image-container">
-                            <div class="hover-overlay">
-                                <span class="hover-text">Reservar</span>
-                            </div>
-                            <img src="img/eventos/evento2.png" alt="La Vinocracia en Croma" class="card-img">
-                        </div>
-                        <div class="event-details">
-                            <span class="event-date">1 de Mayo - 20 Hs.</span>
-                            <h3 class="event-title">Cata y Menú de 4 Pasos</h3>
-                            <p class="event-description">Celebramos el día de lxs trabajadores con platos y vinos que cuentan historias argentinas. Misa y banquete asegurado.</p>
-                            <div class="event-location">📍 San Telmo (Con reserva previa)</div>
-                        </div>
-                    </div>
-                </a>
+    // Carga de Encuentros
+    fetch('encuentros.html')
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById('encuentros-container').innerHTML = html;
+        });
 
-                <a href="https://wa.me/5491112345678?text=%C2%A1Quiero%20una%20reserva!" target="_blank" class="event-card-link">
-                    <div class="event-card">
-                        <div class="image-container">
-                            <div class="hover-overlay">
-                                <span class="hover-text">Reservar</span>
-                            </div>
-                            <img src="img/eventos/evento3.png" alt="Latinoamérica en la Mesa" class="card-img">
-                        </div>
-                        <div class="event-details">
-                            <span class="event-date">Domingo 21 de Junio - 19:30 Hs.</span>
-                            <h3 class="event-title">Latinoamérica en la Mesa</h3>
-                            <p class="event-description">Una experiencia de cocina errante junto a Latitud Sur que atraviesa fronteras culinarias en un espacio íntimo.</p>
-                            <div class="event-location">📍 Espacio Íntimo, Nuñez</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
+    // Carga del Modal
+    fetch('modal.html')
+        .then(res => res.text())
+        .then(text => {
+            document.getElementById('modal-container').innerHTML = text;
+            if (window.initModal) {
+                window.initModal();
+            } else {
+                const modalScript = document.createElement('script');
+                modalScript.src = 'modal.js';
+                modalScript.onload = () => {
+                    if (window.initModal) window.initModal();
+                };
+                document.body.appendChild(modalScript);
+            }
+        });
+}
+
+document.addEventListener("DOMContentLoaded", initSharedComponents);
+</script>
 
     <!-- ========================================== -->
     <!-- SECCIÓN: Kioskito (PRODUCTOS)               -->

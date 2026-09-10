@@ -42,6 +42,16 @@ document.addEventListener("DOMContentLoaded", () => {
   function abrirNota(nota) {
     document.getElementById("notaImg").src = nota.imagen;
     document.getElementById("notaImg").alt = nota.titulo;
+    const imagenSecundaria = document.getElementById("notaImagenSecundaria");
+    const imagenSecundariaElemento = document.getElementById("notaImgSecundaria");
+    if (nota.imagenSecundaria) {
+      imagenSecundariaElemento.src = nota.imagenSecundaria;
+      imagenSecundariaElemento.alt = "";
+      imagenSecundaria.hidden = false;
+    } else {
+      imagenSecundariaElemento.removeAttribute("src");
+      imagenSecundaria.hidden = true;
+    }
     document.getElementById("notaFecha").textContent = nota.fecha;
     document.getElementById("notaAutor").textContent = `Por ${nota.autor}`;
     document.getElementById("notaCategoria").textContent = nota.categoria;

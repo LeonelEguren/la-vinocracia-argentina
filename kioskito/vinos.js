@@ -29,8 +29,8 @@ window.listaVinos = [
     // === NARANJOS ===
     {
         id: "003",
-        nombre: "Galileo",
-        bodega: "Familia Cassone",
+        nombre: "Galileo Naranjo",
+        bodega: "Galileo",
         variedades: "Torrontés riojano 85% - Criollas 15%",
         region: "Chacras de Coria, Luján de Cuyo, Mendoza",
         productor: "Norberto Páez",
